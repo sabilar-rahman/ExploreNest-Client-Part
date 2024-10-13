@@ -1,0 +1,6 @@
+.container {
+  background: url("/login.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
