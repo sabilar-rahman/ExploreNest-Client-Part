@@ -9,9 +9,8 @@ import {
 } from "@nextui-org/react";
 
 import ChangePassword from "../modules/auth/ChangePassword";
+
 import Logout from "./Logout";
-
-
 
 const DropDownProfile = ({
   user,
