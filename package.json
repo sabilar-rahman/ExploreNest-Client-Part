@@ -25,6 +25,7 @@
 		"@react-aria/visually-hidden": "3.8.12",
 		"@types/jsonwebtoken": "^9.0.7",
 		"antd": "^5.21.3",
+		"aos": "^2.3.4",
 		"clsx": "2.1.1",
 		"framer-motion": "~11.1.1",
 		"intl-messageformat": "^10.5.0",
@@ -48,6 +49,7 @@
 		"sonner": "^1.5.0"
 	},
 	"devDependencies": {
+		"@types/aos": "^3.0.7",
 		"@types/node": "20.5.7",
 		"@types/react": "18.3.3",
 		"@types/react-dom": "18.3.0",

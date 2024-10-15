@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
-// import "../../../styles/auth.style.css";
+ import "../../../styles/auth.style.css";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 // import LoginForm from "./LoginForm";
 // import RegisterForm from "./RegisterForm";
-import"@/styles/auth.style.css";
+
 
 const LoginPage = () => {
   // toggle state
