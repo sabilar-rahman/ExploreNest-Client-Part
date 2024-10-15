@@ -32,10 +32,10 @@ export const uploadImageToIMGBB = async (imageFile: any) => {
   };
   
   // Example usage
-  const imageFile = new File(
-    [
-      /* binary data */
-    ],
-    "image.png",
-    { type: "image/png" }
-  );
+  // const imageFile = new File(
+  //   [
+  //     /* binary data */
+  //   ],
+  //   "image.png",
+  //   { type: "image/png" }
+  // );

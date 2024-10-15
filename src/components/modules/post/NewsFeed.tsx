@@ -9,8 +9,7 @@ import NewsFeedPostCard from "./NewsFeedPostCard";
 import PostCreation from "./PostCreation";
 
 import { getAllPost } from "@/src/actions/post/post.action";
-import { IPost } from "@/types/post.types";
-// import { IPost } from "@/src/types/post.types";
+import { IPost } from "@/src/types/post.types";
 
 const NewsFeed = ({ user }: { user: any }) => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -56,7 +55,7 @@ const NewsFeed = ({ user }: { user: any }) => {
   const debouncedSearch = useCallback(
     debounce((query: string) => {
       setSearchTerm(query); // Update search term only after debounce delay
-    }, 500), // Adjust the delay (in milliseconds) as needed
+    }, 100), // Adjust the delay (in milliseconds) as needed
     []
   );
 

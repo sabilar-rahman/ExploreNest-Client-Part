@@ -1,16 +1,12 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Explore-Nest",
-  description: "Get authentic travel information.",
+  name: "ExploreNest",
+  description: "information.",
   navItems: [
     {
       label: "Home",
       href: "/",
-    },
-    {
-      label: "News Feed ",
-      href: "/news-feed",
     },
     {
       label: "About Us",
@@ -25,10 +21,6 @@ export const siteConfig = {
     {
       label: "Home",
       href: "/",
-    },
-    {
-      label: "News Feed ",
-      href: "/news-feed",
     },
     {
       label: "About Us",

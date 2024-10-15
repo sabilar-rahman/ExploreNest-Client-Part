@@ -214,9 +214,10 @@
 //   );
 // };
 
+import { IconSvgProps } from "@/src/types";
 import * as React from "react";
 
-import { IconSvgProps } from "@/types";
+// import { IconSvgProps } from "@/types";
 
 export const GoogleIcon: React.FC<IconSvgProps> = ({
   size = 24,
