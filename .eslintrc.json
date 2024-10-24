@@ -65,7 +65,8 @@
             "position": "after"
           }
         ],
-        "newlines-between": "always"
+        // "newlines-between": "always"
+        "newlines-between": "never"
       }
     ],
     "react/self-closing-comp": "warn",
@@ -74,19 +75,20 @@
       {
         "callbacksLast": true,
         "shorthandFirst": true,
-        "noSortAlphabetically": false,
+        // "noSortAlphabetically": false,
+        "noSortAlphabetically": true,
         "reservedFirst": true
       }
     ],
-    "padding-line-between-statements": [
-      "warn",
-      {"blankLine": "always", "prev": "*", "next": "return"},
-      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
-      {
-        "blankLine": "any",
-        "prev": ["const", "let", "var"],
-        "next": ["const", "let", "var"]
-      }
-    ]
+    // "padding-line-between-statements": [
+    //   "warn",
+    //   {"blankLine": "always", "prev": "*", "next": "return"},
+    //   {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+    //   {
+    //     "blankLine": "any",
+    //     "prev": ["const", "let", "var"],
+    //     "next": ["const", "let", "var"]
+    //   }
+    // ]
   }
 }
