@@ -8,7 +8,8 @@ import {
     fetchBaseQuery,
   } from "@reduxjs/toolkit/query/react";
   import { RootState } from "../store";
-//   import { logout, setUser } from "./auth/authSlice";
+import { logout, setUser } from "../featureApi/auth/authSlice";
+
   
   
   
@@ -52,7 +53,7 @@ import {
   
         api.dispatch(
           setUser({
-            // @ts-expect-error: Ignoring type error due to mismatch in expected types from external library
+          
             user,
             token: data.data.accessToken,
           })
@@ -71,5 +72,5 @@ import {
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
     endpoints: () => ({}),
-    tagTypes: ["Users", "reviews", "Slots", "Services"],
+    tagTypes: ["users", "posts", "comment", "payment"],
   });

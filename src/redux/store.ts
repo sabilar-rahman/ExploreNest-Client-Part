@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 //  import registerReducer from "./api/auth/registerSlice";
 
- import authSlice from "./featureApi/auth/authSlice";
+import authSlice from "./featureApi/auth/authSlice";
 
 import {
   persistReducer,
@@ -17,10 +17,23 @@ import {
 import storage from "redux-persist/lib/storage";
 import { baseApi } from "./api/baseApi";
 
+// Fallback storage if localStorage is not available
+// const createNoopStorage = () => ({
+//   getItem(_key: string) {
+//     return Promise.resolve(null);
+//   },
+//   setItem(_key: string, _value: any) {
+//     return Promise.resolve();
+//   },
+//   removeItem(_key: string) {
+//     return Promise.resolve();
+//   },
+// });
 
 const persistConfig = {
   key: "auth",
-  storage,
+    storage,
+//   storage: typeof window !== "undefined" ? storage : createNoopStorage(),
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authSlice);
@@ -29,9 +42,8 @@ export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
-    
+
     // register: registerReducer,
-   
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
