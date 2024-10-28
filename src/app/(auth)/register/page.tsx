@@ -3,16 +3,26 @@
 import ENForm from "@/src/components/form/ENForm";
 import ENInput from "@/src/components/form/ENInput";
 import { title } from "@/src/components/primitives";
+import { useSignUpMutation } from "@/src/redux/featureApi/auth/authApi";
+import { setUser } from "@/src/redux/featureApi/auth/authSlice";
+import { useAppDispatch } from "@/src/redux/hooks";
 
 import registerValidationSchema from "@/src/schemas/register.schema";
+import { verifyToken } from "@/src/utils/verifyToken";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
-//   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
+  const [signUp] = useSignUpMutation();
+  const dispatch = useAppDispatch();
+  const route = useRouter();
+
+  //   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
 
   //   useEffect(() => {
   //     if (isPending) {
@@ -21,31 +31,63 @@ export default function RegisterPage() {
   //   }, [isPending]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const userData = {
-      ...data,
-      profilePhoto:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    };
+    //   try {
+    //     const userData = {
+    //       ...data,
+    //       img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    //     };
 
-    console.log("Inside form user data: ", userData);
+    //     console.log("Inside form user data: ", userData);
 
-    // handleUserRegistration(userData);
+    //     // handleUserRegistration(userData);
+
+    //     const res = await signUp(userData).unwrap();
+    //     const token = res.data?.data?.accessToken;
+    //     const decodedToken = await verifyToken(token);
+
+    //     dispatch(
+    //       setUser({ user: decodedToken, token: res.data?.data?.accessToken })
+    //     );
+    //     route.push("/");
+    //   } catch (error) {
+    //     toast.error("Unable to  to register");
+    //   }
+    // };
+
+    try {
+      const userData = {
+        ...data,
+        img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      };
+
+      console.log("Inside form user data: ", userData);
+
+      // handleUserRegistration(userData);
+
+      dispatch(setUser(userData));
+
+      const res = await signUp(userData).unwrap();
+
+      toast.success("Registered Successfully");
+      route.push("/");
+    } catch (error) {
+      toast.error("Unable to  to register");
+    }
   };
-
-//   if (isPending) {
-//     //  handle loading state
-//   }
 
   return (
     <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center">
-      <h3 className="my-2 text-xl font-bold">Register with <span className={title({ color: "violet" })}>Explore Nest!&nbsp;</span></h3>
+      <h3 className="my-2 text-xl font-bold">
+        Register with{" "}
+        <span className={title({ color: "violet" })}>Explore Nest!&nbsp;</span>
+      </h3>
       <p className="mb-4">And Share your thoughts</p>
       <div className="w-[35%]">
         <ENForm
           //! Only for development
           defaultValues={{
-            name: "Mir Hussain",
-            email: "mir@gmail.com",
+            name: "abcd",
+            email: "abcd@gmail.com",
             // mobileNumber: "01711223344",
             password: "123456",
           }}

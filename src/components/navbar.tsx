@@ -46,11 +46,11 @@ export const Navbar = () => {
   }, []);
   /* If the component hasn't mounted yet,
   return null to avoid rendering mismatched content
- */ 
-if (!hydration) {
+ */
+  if (!hydration) {
     return null;
   }
-// Render the component content once it has mounted on the client
+  // Render the component content once it has mounted on the client
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -93,8 +93,9 @@ if (!hydration) {
           </NavbarItem>
         ) : (
           <NavbarItem className="hidden sm:flex gap-2">
-            <Button
-              className=" bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
+            <Button color="primary" variant="ghost"
+              // className="text-sm font-normal text-default-600 bg-default-100 "
+              // className=" bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
               onClick={() => router.push("/login")}
             >
               Login

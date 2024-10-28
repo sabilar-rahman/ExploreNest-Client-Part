@@ -33,8 +33,9 @@ const LoginPage = () => {
       //   toast.success("Login Successfull");
       //   router.push("/");
       // }
-
+      toast.success('Login Successfully')
        router.push("/");
+
     } catch (error) {}
   };
 
