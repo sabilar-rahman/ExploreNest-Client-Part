@@ -33,7 +33,7 @@ import { baseApi } from "./api/baseApi";
 const persistConfig = {
   key: "auth",
     storage,
-//   storage: typeof window !== "undefined" ? storage : createNoopStorage(),
+  // storage: typeof window !== "undefined" ? storage : createNoopStorage(),
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authSlice);

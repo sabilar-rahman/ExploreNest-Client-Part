@@ -20,7 +20,8 @@ import { logout, setUser } from "../featureApi/auth/authSlice";
       const token = (getState() as RootState).auth.token;
   
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        // headers.set("authorization", `Bearer ${token}`);
+        headers.set('authorization', token)
       }
   
       return headers;
@@ -72,5 +73,5 @@ import { logout, setUser } from "../featureApi/auth/authSlice";
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
     endpoints: () => ({}),
-    tagTypes: ["users", "posts", "comment", "payment"],
+    tagTypes: ["user", "posts", "comment", "payment"],
   });
