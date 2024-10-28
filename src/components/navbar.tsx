@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -27,28 +28,29 @@ import {
 } from "@/src/components/icons";
 import { Avatar } from "@nextui-org/avatar";
 import NavbarDropDown from "./UI/NavbarDropDown";
+import { useAppSelector } from "../redux/hooks";
+import { useCurrentUser } from "../redux/featureApi/auth/authSlice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
-  // const searchInput = (
-  //   <Input
-  //     aria-label="Search"
-  //     classNames={{
-  //       inputWrapper: "bg-default-100",
-  //       input: "text-sm",
-  //     }}
-  //     endContent={
-  //       <Kbd className="hidden lg:inline-block" keys={["command"]}>
-  //         K
-  //       </Kbd>
-  //     }
-  //     labelPlacement="outside"
-  //     placeholder="Search..."
-  //     startContent={
-  //       <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-  //     }
-  //     type="search"
-  //   />
-  // );
+  const router = useRouter();
+  const currentUser = useAppSelector(useCurrentUser);
+
+  /* 
+  To avoid hydration error,
+ use State to track if the component has mounted on the client*/
+  const [hydration, setHydration] = useState(false);
+  useEffect(() => {
+    setHydration(true);
+  }, []);
+  /* If the component hasn't mounted yet,
+  return null to avoid rendering mismatched content
+ */ 
+if (!hydration) {
+    return null;
+  }
+// Render the component content once it has mounted on the client
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -85,13 +87,23 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
 
-        {/* avatar */}
-        <NavbarItem className="hidden sm:flex gap-2">
-         
-          <NavbarDropDown />
-        </NavbarItem>
+        {currentUser?.email ? (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <NavbarDropDown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <Button
+              className=" bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </Button>
+          </NavbarItem>
+        )}
+
         {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
-        <NavbarItem className="hidden md:flex">
+        {/* <NavbarItem className="hidden md:flex">
           <Button
             isExternal
             as={Link}
@@ -102,11 +114,27 @@ export const Navbar = () => {
           >
             Sponsor
           </Button>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
+
+        {/* {currentUser?.email ? (
+          <NavbarItem className="sm:hidden gap-2">
+            <NavbarDropDown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="sm:hidden  gap-2">
+            <Button
+              className=" bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </Button>
+          </NavbarItem>
+        )} */}
+
         <NavbarMenuToggle />
       </NavbarContent>
 
