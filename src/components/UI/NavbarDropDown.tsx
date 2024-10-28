@@ -12,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 
 import { MdOutlineLogout } from "react-icons/md";
+import { LogoutIcon } from "../icons";
 
 const NavbarDropDown = () => {
   const router = useRouter();
@@ -33,8 +34,8 @@ const NavbarDropDown = () => {
           profile
         </DropdownItem>
 
-        <DropdownItem className="text-danger flex items-center " color="danger">
-          Logout
+        <DropdownItem   className="text-danger" color="danger">
+          Logout 
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
