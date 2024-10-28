@@ -5,14 +5,14 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 
-export interface ENInput {
-  variant?: 'flat' | 'bordered' | 'faded' | 'underlined'
-  size?: 'sm' | 'md' | 'lg'
-  required?: boolean
-  type?: string
-  placeholder?: string
-  label: string
-  name: string
-  isRequired?: boolean
-  disabled?: boolean
-}
+// export interface ENInput {
+//   variant?: 'flat' | 'bordered' | 'faded' | 'underlined'
+//   size?: 'sm' | 'md' | 'lg'
+//   required?: boolean
+//   type?: string
+//   placeholder?: string
+//   label: string
+//   name: string
+//   isRequired?: boolean
+//   disabled?: boolean
+// }
