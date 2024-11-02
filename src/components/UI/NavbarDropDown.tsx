@@ -13,13 +13,12 @@ import { useRouter } from "next/navigation";
 
 import { MdOutlineLogout } from "react-icons/md";
 import { LogoutIcon } from "../icons";
-import { useAppDispatch } from "@/src/redux/hooks";
-import { logout } from "@/src/redux/featureApi/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { logout, useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
 import { toast } from "sonner";
 
 const NavbarDropDown = () => {
   const router = useRouter();
-
 
   const dispatch = useAppDispatch();
 
@@ -30,15 +29,24 @@ const NavbarDropDown = () => {
   const handleLogout = () => {
     dispatch(logout());
     router.push("/");
-    toast.success('Logout Successfully')
+    toast.success("Logout Successfully");
   };
 
+  // const currentUser = useAppSelector((state) => state.auth.user);
+  const currentUser = useAppSelector(useCurrentUser);
+  console.log(currentUser);
 
+  // const { name, email, role, phone, address, img } = currentUser;
 
   return (
     <Dropdown backdrop="blur">
       <DropdownTrigger>
-        <Avatar isBordered radius="sm" className="cursor-pointer"></Avatar>
+        <Avatar
+          src={currentUser?.img}
+          isBordered
+          radius="sm"
+          className="cursor-pointer"
+        ></Avatar>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handleNavigate("/dashboard")}>
