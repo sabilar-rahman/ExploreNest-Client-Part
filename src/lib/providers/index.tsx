@@ -9,7 +9,7 @@ import { persistor, store } from "@/src/redux/store";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import { PersistGate } from "redux-persist/integration/react";
-import persistStore from "redux-persist";
+
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -19,12 +19,12 @@ export interface ProvidersProps {
 export function Providers({ children, themeProps }: ProvidersProps) {
   const router = useRouter();
 
-//   let persistor = persistStore(store);
+  //   let persistor = persistStore(store);
 
   return (
-    <NextUIProvider navigate={router.push}>
-      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-    </NextUIProvider>
+    // <NextUIProvider navigate={router.push}>
+    //   <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+    // </NextUIProvider>
 
     // ------------ REDUX STORE ----------------
     // <Provider store={store}>
@@ -34,13 +34,13 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     //   </NextUIProvider>
     // </Provider>
 
-    // <Provider store={store}>
-    //   <NextUIProvider navigate={router.push}>
-    //     <PersistGate loading={null} persistor={persistor}>
-    //       <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-    //       <Toaster richColors />
-    //     </PersistGate>
-    //   </NextUIProvider>
-    // </Provider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <NextUIProvider navigate={router.push}>
+          <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+          <Toaster richColors />
+        </NextUIProvider>
+      </PersistGate>
+    </Provider>
   );
 }

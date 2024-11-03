@@ -1,9 +1,11 @@
+// 'use client';
+import MyProfile from '@/src/components/modules/dashboard/profile/MyProfile';
 import React from 'react';
 
 const UserProfilePage = () => {
   return (
     <div>
-      <h1>Hello,This is page Route!</h1>
+     <MyProfile/>
     </div>
   );
 };

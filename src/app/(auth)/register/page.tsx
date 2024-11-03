@@ -57,7 +57,7 @@ export default function RegisterPage() {
     try {
       const userData = {
         ...data,
-        img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        img: "https://images.pexels.com/photos/279949/pexels-photo-279949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       };
 
       console.log("Inside form user data: ", userData);

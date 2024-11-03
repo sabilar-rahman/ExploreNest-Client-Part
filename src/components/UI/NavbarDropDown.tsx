@@ -16,11 +16,20 @@ import { LogoutIcon } from "../icons";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { logout, useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
 import { toast } from "sonner";
+import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import authCurrentUser from "@/src/redux/featureApi/auth/authCurrentUser";
+import { useEffect, useState } from "react";
 
 const NavbarDropDown = () => {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
+
+  const { user } = authCurrentUser();
+
+  console.log(user);
+
+ 
 
   const handleNavigate = (pathname: string) => {
     router.push(pathname);
@@ -32,28 +41,26 @@ const NavbarDropDown = () => {
     toast.success("Logout Successfully");
   };
 
-  // const currentUser = useAppSelector((state) => state.auth.user);
-  const currentUser = useAppSelector(useCurrentUser);
-  console.log(currentUser);
 
-  // const { name, email, role, phone, address, img } = currentUser;
+
+
 
   return (
     <Dropdown backdrop="blur">
       <DropdownTrigger>
         <Avatar
-          src={currentUser?.img}
+          src={user?.img}
           isBordered
           radius="sm"
           className="cursor-pointer"
         ></Avatar>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem onClick={() => handleNavigate("/dashboard")}>
+        <DropdownItem onClick={() => handleNavigate("/dashboard/profile")}>
           Dashboard
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigate("/profile")}>
-          profile
+        <DropdownItem onClick={() => handleNavigate("/dashboard/profile")}>
+         My profile
         </DropdownItem>
 
         <DropdownItem

@@ -3,19 +3,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
-// export type TUser = {
-//     _id?: string;
-//     name: string;
-//     email: string;
-//     img: string;
-//     role: string;
-//     password: string;
-
-//   };
 
 export interface TUser {
-  _id?: string;
-  name?: string;
+  id: string;
+  name: string;
   img?: string;
   email: string;
   password: string;

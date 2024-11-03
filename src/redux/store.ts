@@ -1,7 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-//  import registerReducer from "./api/auth/registerSlice";
-
 import authSlice from "./featureApi/auth/authSlice";
 
 import {
@@ -32,7 +29,7 @@ import { baseApi } from "./api/baseApi";
 
 const persistConfig = {
   key: "auth",
-    storage,
+  storage,
   // storage: typeof window !== "undefined" ? storage : createNoopStorage(),
 };
 

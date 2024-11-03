@@ -32,10 +32,12 @@ import { useAppSelector } from "../redux/hooks";
 import { useCurrentUser } from "../redux/featureApi/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import authCurrentUser from "../redux/featureApi/auth/authCurrentUser";
 
 export const Navbar = () => {
   const router = useRouter();
   const currentUser = useAppSelector(useCurrentUser);
+  // const currentUser = authCurrentUser();
 
   /* 
   To avoid hydration error,
@@ -103,38 +105,13 @@ export const Navbar = () => {
           </NavbarItem>
         )}
 
-        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
-        {/* <NavbarItem className="hidden md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-          >
-            Sponsor
-          </Button>
-        </NavbarItem> */}
+       
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
 
-        {/* {currentUser?.email ? (
-          <NavbarItem className="sm:hidden gap-2">
-            <NavbarDropDown />
-          </NavbarItem>
-        ) : (
-          <NavbarItem className="sm:hidden  gap-2">
-            <Button
-              className=" bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
-              onClick={() => router.push("/login")}
-            >
-              Login
-            </Button>
-          </NavbarItem>
-        )} */}
+       
 
         <NavbarMenuToggle />
       </NavbarContent>
