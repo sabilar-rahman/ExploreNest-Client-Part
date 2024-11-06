@@ -6,7 +6,7 @@ import {
     useUpdateUserInfoMutation,
   
 } from "@/src/redux/featureApi/auth/authApi";
-import authCurrentUser from "@/src/redux/featureApi/auth/authCurrentUser";
+// import authCurrentUser from "@/src/redux/featureApi/auth/authCurrentUser";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
