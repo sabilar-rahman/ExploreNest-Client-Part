@@ -13,6 +13,7 @@ import { MdRefresh } from "react-icons/md";
 import { useGetAllPostQuery } from "@/src/redux/featureApi/post/postApi";
 import { TPost } from "@/src/types";
 import { useDebounce } from "@/src/utils/useDebounce";
+import PostCard from "./PostCard";
 
 
 

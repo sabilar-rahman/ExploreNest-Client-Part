@@ -15,7 +15,7 @@ interface IProps {
   images: string[];
 }
 
-const ImageGallery = ({ images }: IProps) => {
+const ImageGalleryView = ({ images }: IProps) => {
   const visibleImages = images?.slice(0, 4);
   const remainingCount = images?.length - 4;
 
@@ -61,4 +61,4 @@ const ImageGallery = ({ images }: IProps) => {
   );
 };
 
-export default ImageGallery;
+export default ImageGalleryView;

@@ -19,7 +19,7 @@ const MyPostsPage = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="flex items-center mb-6 sm:mb-0">
               <IoNewspaperOutline className="text-primary text-4xl mr-4" />
-              <h1 className="text-3xl sm:text-4xl font-bold">Manage Content</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold">Edit delete Content</h1>
             </div>
             <Button
               color="primary"
