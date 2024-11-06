@@ -72,7 +72,7 @@ import ENForm from "@/src/components/form/ENForm";
 import ENInput from "@/src/components/form/ENInput";
 import TSelect from "@/src/components/form/ENSelect";
 import TTextarea from "@/src/components/form/ENTextArea";
-import Container from "@/src/components/ui/Container";
+// import Container from "@/src/components/ui/Container";
 import {
   useGetCurrentUserQuery,
   useUpdateUserMutation,
@@ -154,7 +154,7 @@ const EditProfilePage = () => {
   };
 
   return (
-    <Container>
+    <div className="container mx-auto">
       {currentUserLoading ? (
         <Loading />
       ) : (
@@ -277,7 +277,7 @@ const EditProfilePage = () => {
           </CardBody>
         </Card>
       )}
-    </Container>
+    </div>
   );
 };
 

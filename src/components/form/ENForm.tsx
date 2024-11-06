@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 interface formConfig {
   defaultValues?: Record<string, any>;
@@ -11,6 +11,7 @@ interface formConfig {
 interface IProps extends formConfig {
   children: ReactNode;
   onSubmit: SubmitHandler<any>;
+  resetOnSubmit?: boolean;
 }
 
 export default function ENForm({
@@ -18,6 +19,7 @@ export default function ENForm({
   onSubmit,
   defaultValues,
   resolver,
+  resetOnSubmit,
 }: IProps) {
   const formConfig: formConfig = {};
 
@@ -32,6 +34,14 @@ export default function ENForm({
   const methods = useForm(formConfig);
 
   const submitHandler = methods.handleSubmit;
+
+  const submit: SubmitHandler<FieldValues> = (data) => {
+    onSubmit(data);
+    if (resetOnSubmit) {
+      methods.reset();
+    }
+  };
+
 
   return (
     <FormProvider {...methods}>
