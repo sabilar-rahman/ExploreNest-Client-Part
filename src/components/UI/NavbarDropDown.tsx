@@ -29,8 +29,6 @@
 
 // //   const {data} = useGetCurrentUserQuery({})
 
- 
-
 // //   const handleNavigate = (pathname: string) => {
 // //     router.push(pathname);
 // //   };
@@ -40,8 +38,6 @@
 // //     router.push("/");
 // //     toast.success("Logout Successfully");
 // //   };
-
-
 
 // //   return (
 // //     <Dropdown backdrop="blur">
@@ -75,7 +71,6 @@
 
 // // export default NavbarDropDown;
 
-
 // "use client";
 
 // import { Avatar } from "@nextui-org/avatar";
@@ -91,8 +86,6 @@
 //   const router = useRouter();
 //   const dispatch = useAppDispatch();
 //   const { data } = useGetCurrentUserQuery({});
-
-
 
 //   const handleNavigate = (pathname: string) => {
 //     router.push(pathname);
@@ -151,6 +144,9 @@ import { CheckIcon } from "lucide-react";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { logout } from "@/src/redux/featureApi/auth/authSlice";
+import { toast } from "sonner";
+import { GoVerified } from "react-icons/go";
+import { Tooltip, Button } from "@nextui-org/react";
 
 // import { useAppDispatch } from "@/src/redux/hook";
 //  import { logout } from "@/src/redux/features/auth/authSlice";
@@ -159,44 +155,64 @@ const NavbarDropdown = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { data: userData } = useGetCurrentUserQuery({});
+  const { data: user } = useGetCurrentUserQuery({});
 
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
 
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
+
+  /* 
+  To avoid hydration error,
+  use State to track if the component has mounted on the client*/
+  const [hydration, setHydration] = useState(false);
   useEffect(() => {
-    setIsMounted(true);
+    setHydration(true);
   }, []);
+  /* If the component hasn't mounted yet,
+   return null to avoid rendering mismatched content
+  */
+  if (!hydration) {
+    return null;
+  }
+  // Render the component content once it has mounted on the client
 
   const handleLogout = () => {
     dispatch(logout());
-    //  todo: handle protected route
     router.push("/");
+    toast.success("Logout Successfully");
   };
 
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
   };
 
-  if (!isMounted) {
+  if (!hydration) {
     return null;
   }
 
   return (
-    <Dropdown>
+    <Dropdown backdrop="blur">
       <Badge
         isOneChar
-        className={`${!userData?.data?.isVerified ? "hidden" : ""}`}
-        color="success"
-        content={<CheckIcon />}
-        placement="bottom-right"
+        className={`${!user?.data?.isVerified ? "hidden" : ""}`}
+        content={
+         
+            <GoVerified />
+       
+        }
+        placement="top-right"
         shape="circle"
+        size="lg"
+        color="danger"
       >
         <DropdownTrigger>
           <Avatar
             isBordered
             className="cursor-pointer"
-            color="primary"
-            src={userData?.data?.profileImage}
+            radius="sm"
+            src={user?.data?.profileImage}
           />
         </DropdownTrigger>
       </Badge>
@@ -218,5 +234,3 @@ const NavbarDropdown = () => {
 };
 
 export default NavbarDropdown;
-
-
