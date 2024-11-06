@@ -31,28 +31,7 @@ export default function RegisterPage() {
   //   }, [isPending]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    //   try {
-    //     const userData = {
-    //       ...data,
-    //       img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    //     };
-
-    //     console.log("Inside form user data: ", userData);
-
-    //     // handleUserRegistration(userData);
-
-    //     const res = await signUp(userData).unwrap();
-    //     const token = res.data?.data?.accessToken;
-    //     const decodedToken = await verifyToken(token);
-
-    //     dispatch(
-    //       setUser({ user: decodedToken, token: res.data?.data?.accessToken })
-    //     );
-    //     route.push("/");
-    //   } catch (error) {
-    //     toast.error("Unable to  to register");
-    //   }
-    // };
+   
 
     try {
       const userData = {
@@ -71,7 +50,7 @@ export default function RegisterPage() {
       toast.success("Registered Successfully");
       route.push("/");
     } catch (error) {
-      toast.error("Unable to  to register");
+      toast.error("Unable  to register");
     }
   };
 

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, ChangeEvent } from "react";
@@ -23,7 +22,6 @@ import Loading from "@/src/components/Loading";
 // import { TResponse, TUser } from "@/src/types";
 import { userUpdateValidationSchema } from "@/src/schemas/auth.schema";
 import { TResponse, TUser } from "@/src/utils";
-
 
 const genderOptions = [
   { key: "male", label: "Male" },
@@ -121,7 +119,7 @@ const EditProfilePage = () => {
                 )}
               </div>
               <label
-                className="absolute bottom-0 right-0 bg-primary text-white rounded-full p-2 cursor-pointer"
+                className="absolute bottom-0 right-0 bg-black text-white rounded-full p-2 cursor-pointer"
                 htmlFor="profile-image"
               >
                 <span className="hidden">upload profile</span>
@@ -166,54 +164,56 @@ const EditProfilePage = () => {
                 <div className="py-2">
                   <ENInput label="Name" name="name" type="text" />
                 </div>
-                <div className="py-2">
+                {/* <div className="py-2">
                   <TSelect
                     label="Gender"
                     name="gender"
                     options={genderOptions}
                     placeholder="Select your gender"
                   />
-                </div>
+                </div> */}
                 <div className="py-2">
                   <ENInput
                     isDisabled={true}
-                    label="Email (Can't be changed)"
+                    label="Email "
                     name="email"
                     type="email"
                   />
                 </div>
-                <div className="py-2">
+                {/* <div className="py-2">
                   <ENInput
                     label="Mobile Number"
                     name="mobileNumber"
                     type="text"
                   />
-                </div>
-                <div className="py-2">
+                </div> */}
+                {/* <div className="py-2">
                   <ENInput
                     isDisabled={true}
                     label="Birth date (Can't be changed)"
                     name="birthDate"
                     type="text"
                   />
-                </div>
-                <div className="py-2">
+                </div> */}
+
+                {/* <div className="py-2">
                   <ENInput label="Address" name="address" type="text" />
-                </div>
-                <div className="py-2 sm:col-span-2">
+                </div> */}
+
+                {/* <div className="py-2 sm:col-span-2">
                   <TTextarea label="Bio" name="bio" />
-                </div>
+                </div>*/}
               </div>
 
               <div className="w-full flex justify-center">
                 <Button
-                  className="w-2/5  py-2 mt-6 rounded-lg bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
+                  className="w-2/5  py-2 mt-6 rounded-lg   font-semibold transition duration-300 transform hover:scale-105"
                   isLoading={updateUserLoading}
                   size="lg"
                   spinner={<Spinner color="default" size="sm" />}
                   type="submit"
                 >
-                  Update
+                  Update Profile
                 </Button>
               </div>
             </ENForm>
@@ -225,4 +225,3 @@ const EditProfilePage = () => {
 };
 
 export default EditProfilePage;
-

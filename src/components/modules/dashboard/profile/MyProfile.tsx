@@ -245,7 +245,7 @@ const MyProfile = () => {
     <div className="container mx-auto px-2 py-2 ">
       {userLoading && <Loading />}
 
-      <Card className="bg-background shadow-lg overflow-hidden">
+      <Card className="bg-background shadow-lg overflow-hidden"> 
         <h1 className="text-2xl text-center font-bold ">Profile Information</h1>
         <CardHeader className="relative p-0 ">
           <div className="w-full h-48 bg-white" />
@@ -262,7 +262,7 @@ const MyProfile = () => {
               <Avatar
                 isBordered
                 className="w-48 h-32"
-                radius="sm"
+                 radius="sm"
                 src={userData?.data?.profileImage}
               />
             </Badge>
@@ -286,7 +286,7 @@ const MyProfile = () => {
             </div>
           </div>
 
-          
+          {/* <Divider className="my-6" /> */}
 
           <div className="grid grid-cols-1 md:grid-cols-1 gap-6 ">
             <Button
@@ -299,9 +299,8 @@ const MyProfile = () => {
               //   borderRadius: "10px",
               // }}
               onPress={followersModalOnOpen}
-              variant="bordered"
-            >
-              <span className="font-medium">Followers :</span>
+              variant="bordered">
+              <span className="font-medium">Followers</span>
               <span className=" font-bold">
                 {userData?.data?.followers?.length}
               </span>
@@ -319,19 +318,20 @@ const MyProfile = () => {
               onPress={followingModalOnOpen}
               variant="bordered"
             >
-              <span className="font-medium">Following :</span>
+              <span className="font-medium">Following</span>
               <span className="font-bold">
                 {userData?.data?.following?.length}
               </span>
             </Button>
           </div>
 
-         
+          {/* <Divider className="my-2" /> */}
 
           <div className="flex justify-center space-x-4 mt-4">
             <Link href={`/dashboard/edit-profile`}>
-              <Button>Edit Profile</Button>
+              <Button >Edit Profile</Button>
             </Link>
+           
           </div>
         </CardBody>
       </Card>
