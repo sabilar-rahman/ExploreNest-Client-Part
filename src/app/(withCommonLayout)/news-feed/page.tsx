@@ -1,9 +1,10 @@
+import AllPost from '@/src/components/modules/allPost/AllPost';
 import React from 'react';
 
 const page = () => {
   return (
-    <div>
-      <h1>Hello,This is page Route!</h1>
+    <div className='container mx-auto'>
+      <AllPost/>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/src/components/Loading";
+import PremiumCard from "@/src/components/modal/premiumcard/PremiumCard";
 import Comment from "@/src/components/modules/comment/Comment";
 import PostDetailsCard from "@/src/components/modules/post/PostDetailsCard";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
