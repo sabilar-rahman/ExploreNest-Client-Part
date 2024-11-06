@@ -17,20 +17,40 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 //   disabled?: boolean
 // }
 
+// export interface TPost {
+//   _id: string;
+//   title: string;
+//   content: string;
+//   description: string;
+//   author: TUser;
+//   image: string[];
+//   category: string;
+//   upvote: string[];
+//   downvote: string[];
+//   premium: boolean;
+//   delete: boolean;
+//   commentCount: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   __v: number;
+// }
+
+
 export interface TPost {
   _id: string;
   title: string;
   content: string;
   description: string;
   author: TUser;
-  image: string[];
+  images: string[];
   category: string;
   upvote: string[];
   downvote: string[];
-  premium: boolean;
-  delete: boolean;
-  commentCount: number;
+  isPremium: boolean;
+  isDelete: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;
+  location: string;
+  commentCount: number;
 }
