@@ -24,6 +24,7 @@ import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
 import CommentCardDetails from "./CommentCardDetails";
 import ENForm from "../../form/ENForm";
 import { commentValidationSchema } from "@/src/schemas";
+import { FaRegCommentDots } from "react-icons/fa";
 
 
 
@@ -63,11 +64,11 @@ const Comment = ({ commentData }: IProps) => {
 
   return (
     <Card className="w-full bg-background shadow-md">
-      <CardHeader className="flex flex-col items-start px-6 pt-6 pb-4">
-        <div className="flex items-center w-full mb-4">
-          <MessageCircle className="w-6 h-6 text-primary mr-2" />
+      <CardHeader className="flex flex-col items-start px-6 ">
+        <div className="flex items-center w-full ">
+          <FaRegCommentDots className="w-6 h-6 text-primary mr-2" />
           <h2 className="text-2xl font-bold">
-            Comments ({commentData.length})
+             ({commentData.length})
           </h2>
         </div>
         <div className="w-full">
@@ -76,8 +77,8 @@ const Comment = ({ commentData }: IProps) => {
             resolver={zodResolver(commentValidationSchema)}
             onSubmit={onSubmit}
           >
-            <ENTextArea label="Share your thoughts..." name="comment" />
-            <div className="flex justify-end mt-4">
+            <ENTextArea label="comment here" name="comment" />
+            <div className="flex justify-end ">
               <Tooltip
                 closeDelay={2000}
                 color="warning"
@@ -89,12 +90,13 @@ const Comment = ({ commentData }: IProps) => {
                   color="primary"
                   disabled={user === null}
                   isLoading={isLoading}
-                  spinner={<Spinner color="default" size="sm" />}
-                  startContent={<Send className="w-4 h-4" />}
+                  spinner={<Spinner color="success" size="sm" />}
+                  // startContent={<Send className="w-4 h-4" />}
                   type="submit"
                 >
-                  Send
+                 Click to post comment
                 </Button>
+
               </Tooltip>
             </div>
           </ENForm>

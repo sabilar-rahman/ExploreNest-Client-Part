@@ -32,15 +32,24 @@ import { Tooltip } from "@nextui-org/tooltip";
 
 import EditPost from "../../modal/EditPost";
 
+import {
+  useDeletePostMutation,
+  useHandleVotingMutation,
+} from "@/src/redux/featureApi/post/postApi";
 
-
+import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
+import {
+  useGetCurrentUserQuery,
+  useToggleBookMarkPostMutation,
+  useToggleFollowUnfollowUserMutation,
+} from "@/src/redux/featureApi/auth/authApi";
 import { TPost } from "@/src/types";
 import { useAppSelector } from "@/src/redux/hooks";
 import DetailPageImageGallery from "../../imagegallery/DetailPageImageGallery";
 import { TResponse } from "@/src/utils";
-import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
-import { useDeletePostMutation, useHandleVotingMutation } from "@/src/redux/featureApi/post/postApi";
-import { useGetCurrentUserQuery, useToggleBookMarkPostMutation, useToggleFollowUnfollowUserMutation } from "@/src/redux/featureApi/auth/authApi";
+import { GoVerified } from "react-icons/go";
+import { PiCrown } from "react-icons/pi";
+import { BiDownvote, BiUpvote } from "react-icons/bi";
 // import { TResponse } from "@/src/types";
 
 interface IProps {
@@ -61,6 +70,8 @@ const PostDetailsCard = ({ postData }: IProps) => {
   // handle book mark post rtk query
   const [handleBookMarkPost, { isLoading: handleBookMarkPostLoading }] =
     useToggleBookMarkPostMutation();
+
+    
 
   // handle user follow rtk query
   const [handleFollow, { isLoading: handleFollowLoading }] =
@@ -85,6 +96,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
     };
 
     await handleVote(upvoteData);
+    toast.success("Upvoted successfully");
   };
 
   const handleDownvote = async (id: string) => {
@@ -96,16 +108,17 @@ const PostDetailsCard = ({ postData }: IProps) => {
     };
 
     await handleVote(downvoteData);
+    toast.success("Downvoted successfully");
   };
 
-  const handleShare = async (copiedText: string) => {
-    try {
-      await navigator.clipboard.writeText(copiedText);
-      toast.success("Post link copied to clipboard");
-    } catch (err) {
-      console.error("Failed to copy text: ", err);
-    }
-  };
+  // const handleShare = async (copiedText: string) => {
+  //   try {
+  //     await navigator.clipboard.writeText(copiedText);
+  //     toast.success("Post link copied to clipboard");
+  //   } catch (err) {
+  //     console.error("Failed to copy text: ", err);
+  //   }
+  // };
 
   const handleBookmark = async (postId: string) => {
     const bookmarkPostData = {
@@ -149,7 +162,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
   const { data: currentUserData } = useGetCurrentUserQuery({});
 
   const bookmarkedPostId = currentUserData?.data?.bookmarkPosts?.map(
-    (item: { _id: any }) => item._id,
+    (item: { _id: any }) => item._id
   );
 
   return (
@@ -162,24 +175,27 @@ const PostDetailsCard = ({ postData }: IProps) => {
               <Badge
                 isOneChar
                 className={`${!postData?.author?.isVerified ? "hidden" : ""}`}
-                color="success"
-                content={<CheckIcon />}
-                placement="bottom-right"
+                content={<GoVerified />}
+                placement="top-right"
                 shape="circle"
+                color="danger"
               >
                 <Avatar
                   isBordered
                   alt={postData?.author?.name}
-                  className="w-16 h-16 border-2 border-blue-500"
+                  className="w-16 h-16 "
                   src={postData?.author?.profileImage}
+                  radius="sm"
                 />
               </Badge>
             </div>
             <div className="ml-4">
               {" "}
               <p className="font-semibold text-lg">{postData?.author?.name}</p>
+
+              post date:
               <p className="text-sm text-default-500">
-                {format(new Date(postData?.createdAt!), "MMM dd, yyyy")}
+                {format(new Date(postData?.createdAt!), "dd-MMM-yyyy")}
               </p>
               <p className="text-sm text-default-500">
                 Followers: {postData?.author?.followers?.length}
@@ -224,7 +240,8 @@ const PostDetailsCard = ({ postData }: IProps) => {
               content="Login First"
               isDisabled={user !== null}
             >
-              <Button
+
+              {/* <Button
                 className={
                   bookmarkedPostId?.includes(postData?._id)
                     ? "text-primary"
@@ -242,7 +259,9 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 ) : (
                   <FaRegBookmark className="w-5 h-5" />
                 )}
-              </Button>
+              </Button> */}
+
+
             </Tooltip>
             {user?._id === postData?.author?._id && (
               <Dropdown>
@@ -276,43 +295,54 @@ const PostDetailsCard = ({ postData }: IProps) => {
         </div>
 
         {/* post title */}
-        <h1 className="text-3xl font-bold mb-2">{postData?.title}</h1>
+        <h1 className="text-lg">{postData?.title}</h1>
 
-        {/* post details */}
-        <p className="text-lg text-default-700 dark:text-gray-300 mb-4">
-          {postData?.description}
-        </p>
 
-        <div className="flex items-center mb-2">
+        {/* <div className="flex items-center mb-2">
           <MapPin className="w-5 h-5 text-default-500 mr-2" />
           <span className="text-default-600">{postData?.location}</span>
-        </div>
+        </div> */}
 
         <div className="flex flex-wrap gap-2 mb-4">
-          <span className="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">
+
+          {/* <span className="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">
             {postData?.category}
-          </span>
-          {postData?.isPremium && (
+          </span> */}
+
+
+          {/* {postData?.isPremium && (
             <span className="bg-warning/10 text-warning text-sm font-medium px-3 py-1 rounded-full">
               Premium
             </span>
-          )}
+          )} */}
         </div>
+
+        
+        
       </CardHeader>
 
-      <Divider />
+      
 
       {/* image gallery */}
       <CardBody className="px-6 py-4">
         {postData?.images && (
           <DetailPageImageGallery images={postData?.images} />
         )}
+        
+        {/* post details */}
+        <p className="text-lg text-default-700 dark:text-gray-300 ">
+          {postData?.description}
+        </p>
+        
         <div
           dangerouslySetInnerHTML={{ __html: postData?.content }}
-          className="mt-6 prose dark:prose-invert max-w-none"
+          className="mt-2 prose dark:prose-invert max-w-none"
         />
+        
+
+        
       </CardBody>
-      <Divider />
+     
       {/* post upvote downvote and share button on the cart foot */}
       <CardFooter className="px-6 py-4">
         <div className="flex justify-between items-center w-full">
@@ -327,16 +357,17 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 color={
                   !postData?.upvote?.includes(user?._id || "")
                     ? "default"
-                    : "primary"
+                    : "success"
                 }
                 disabled={user === null}
                 size="sm"
                 variant="flat"
                 onClick={() => handleUpvote(postData?._id)}
               >
-                <ThumbsUp className="w-5 h-5 mr-2" />
+                <BiUpvote className="w-5 h-5 mr-2" />
                 <span>{postData?.upvote?.length}</span>
               </Button>
+              
             </Tooltip>
             <Tooltip
               closeDelay={2000}
@@ -355,24 +386,22 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 variant="flat"
                 onClick={() => handleDownvote(postData?._id)}
               >
-                <ThumbsDown className="w-5 h-5 mr-2" />
+                <BiDownvote  className="w-5 h-5 mr-2" />
                 <span>{postData?.downvote?.length}</span>
               </Button>
             </Tooltip>
+
+
+            
           </div>
-          {/* <div className="relative inline-block">
-            <button
-              className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition"
-              onClick={() =>
-                handleShare(
-                  `htt/post/${postData?._id}`,
-                )
-              }
-            >
-              <Share2 className="w-5 h-5 mr-2" />
-              Share
-            </button>
-          </div> */}
+
+          {postData?.isPremium && (
+          <span className="flex items-center gap-1 mb-2 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 text-xs font-semibold px-2.5 py-0.5 rounded">
+            <PiCrown className="w-4 h-4" />
+            Premium
+          </span>
+        )}
+
         </div>
       </CardFooter>
     </Card>

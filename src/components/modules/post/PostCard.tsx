@@ -77,6 +77,7 @@ export default function PostCard({ post }: { post: TPost }) {
     };
 
     await handleVote(upvoteData);
+    toast.success("Upvoted successfully");
   };
 
   // handle downvote function
@@ -89,6 +90,7 @@ export default function PostCard({ post }: { post: TPost }) {
     };
 
     await handleVote(downvoteData);
+    toast.success("Downvoted successfully");
   };
 
   // handle share function
@@ -238,7 +240,7 @@ export default function PostCard({ post }: { post: TPost }) {
         </p> */}
 
         <div className="flex items-center text-center text-sm ">
-          Date Posted:
+          Posted Date:
           <p className=" ">
             {format(new Date(post?.createdAt), "dd MMM,yyyy")}
           </p>
@@ -260,18 +262,31 @@ export default function PostCard({ post }: { post: TPost }) {
             </span>
           )} */}
 
-          {post?.author?.role === "ADMIN" && (
+          {/* {post?.author?.role === "ADMIN" && (
             <span className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded">
               Admin
             </span>
-          )}
+          )} */}
+
+
         </div>
 
         <ImageGalleryView images={post?.images} />
 
-        <p className="text-default-700 dark:text-gray-300 mb-4">
+        <p className="text-default-700 dark:text-gray-300 mb-2">
           {post?.description?.substring(0, 100)}...
         </p>
+
+
+        {/* edited desctiption content  */}
+        
+        <div
+          dangerouslySetInnerHTML={{ __html: post?.content }}
+          className="mt-2 prose dark:prose-invert max-w-none"
+        > 
+        
+        </div>
+
       </CardBody>
       <CardFooter className="flex flex-wrap justify-between items-center px-4 py-3 bg-default-100 dark:bg-default-50">
         <div className="flex space-x-4 mb-2 sm:mb-0">
@@ -311,7 +326,7 @@ export default function PostCard({ post }: { post: TPost }) {
               <span>{post?.downvote?.length}</span>
             </Button>
           </Tooltip>
-          <Link href={`/post/${post?._id}`}>
+          <Link href={`/news-feed/post/${post?._id}`}>
             <Button className="text-default-500" size="sm" variant="light">
               <FaRegCommentDots className="w-5 h-5" />
               <span>{post?.commentCount}</span>

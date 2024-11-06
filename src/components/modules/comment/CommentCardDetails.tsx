@@ -61,9 +61,12 @@ const CommentCardDetails = ({ comment }: IProps) => {
   return (
     <div className="flex items-start">
       <Avatar
+       isBordered
         alt={comment?.commenter?.name}
-        className="mr-4"
-        size="md"
+         className="mr-4"
+        
+        
+         radius="sm"
         src={comment?.commenter?.profileImage}
       />
       <div className="flex-grow">
@@ -71,7 +74,7 @@ const CommentCardDetails = ({ comment }: IProps) => {
           <p className="font-semibold text-lg">{comment?.commenter?.name}</p>
           <div className="flex items-center">
             <p className="text-sm text-default-500 mr-2">
-              {format(new Date(comment?.createdAt), "MMM dd, yyyy HH:mm")}
+              {format(new Date(comment?.createdAt), "dd-MMM-yyyy HH:mm")}
             </p>
             {user?._id.toString() === comment?.commenter?._id?.toString() && (
               <>
@@ -84,19 +87,19 @@ const CommentCardDetails = ({ comment }: IProps) => {
                   <DropdownMenu aria-label="Comment actions">
                     <DropdownItem
                       key="edit"
-                      startContent={<Edit2 className="w-4 h-4" />}
+                      // startContent={<Edit2 className="w-4 h-4" />}
                       onPress={onOpen}
                     >
-                      Edit
+                      Edit Comment
                     </DropdownItem>
                     <DropdownItem
                       key="delete"
                       className="text-danger"
                       color="danger"
-                      startContent={<Trash2 className="w-4 h-4" />}
+                      // startContent={<Trash2 className="w-4 h-4" />}
                       onPress={() => handleDeleteComment(comment?._id)}
                     >
-                      Delete
+                      Delete Comment
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

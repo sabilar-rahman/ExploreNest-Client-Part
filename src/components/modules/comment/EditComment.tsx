@@ -9,7 +9,6 @@ import { TComment, TResponse } from "@/src/utils";
 import ENForm from "../../form/ENForm";
 import ENInput from "../../form/ENInput";
 
-
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
@@ -36,7 +35,7 @@ const EditComment = ({ isOpen, onClose, commentId, comment }: IProps) => {
 
     try {
       const res = (await updateComment(
-        updateCommentData,
+        updateCommentData
       )) as TResponse<TComment>;
 
       if (res.error) {
@@ -57,7 +56,7 @@ const EditComment = ({ isOpen, onClose, commentId, comment }: IProps) => {
 
   return (
     <Modal
-      backdrop={"blur"}
+      // backdrop={"blur"}
       classNames={{
         base: "bg-background",
         header: "border-b border-divider",
@@ -72,24 +71,24 @@ const EditComment = ({ isOpen, onClose, commentId, comment }: IProps) => {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              <h2 className="text-xl font-bold">Edit Comment</h2>
+              <h2 className="text-lg">Edit Comment Here</h2>
             </ModalHeader>
-            <ModalBody className="my-8">
+            <ModalBody className="my-2">
               <ENForm
                 defaultValues={commentUpdateDefaultValue}
                 onSubmit={onSubmit}
               >
-                <ENInput label="New Comment" name="comment" />
-                <div className="mt-4 flex-1 w-2/6">
+                <ENInput label="Edit your Comment" name="comment" />
+                <div className="mt-2 flex-1 w-2/6">
                   <Button
                     className="w-full"
                     color="primary"
                     isLoading={updateCommentLoading}
-                    size="md"
+                    size="lg"
                     spinner={<Spinner color="current" size="sm" />}
                     type="submit"
                   >
-                    Update
+                    Update Comment
                   </Button>
                 </div>
               </ENForm>
