@@ -55,3 +55,14 @@ export type TUser = {
   __v: number;
 };
 
+
+
+export type TComment = {
+  _id: string;
+  post: string;
+  commenter: TUser;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
