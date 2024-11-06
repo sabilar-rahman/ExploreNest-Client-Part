@@ -33,21 +33,14 @@ import { Tooltip } from "@nextui-org/tooltip";
 import EditPost from "../../modal/EditPost";
 
 
-import {
-  useDeletePostMutation,
-  useHandleVotingMutation,
-} from "@/src/redux/featureApi/post/postApi";
 
-import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
-import {
-  useGetCurrentUserQuery,
-  useToggleBookMarkPostMutation,
-  useToggleFollowUnfollowUserMutation,
-} from "@/src/redux/featureApi/auth/authApi";
 import { TPost } from "@/src/types";
 import { useAppSelector } from "@/src/redux/hooks";
 import DetailPageImageGallery from "../../imagegallery/DetailPageImageGallery";
 import { TResponse } from "@/src/utils";
+import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
+import { useDeletePostMutation, useHandleVotingMutation } from "@/src/redux/featureApi/post/postApi";
+import { useGetCurrentUserQuery, useToggleBookMarkPostMutation, useToggleFollowUnfollowUserMutation } from "@/src/redux/featureApi/auth/authApi";
 // import { TResponse } from "@/src/types";
 
 interface IProps {

@@ -9,15 +9,6 @@ import { useGetMyCommentQuery } from "@/src/redux/featureApi/comment/commentApi"
 import { useGetSinglePostQuery } from "@/src/redux/featureApi/post/postApi";
 import { Divider, Spinner } from "@nextui-org/react";
 
-// import { Divider } from "@nextui-org/divider";
-// import { Spinner } from "@nextui-org/spinner";
-// import { useGetSinglePostQuery } from "@/src/redux/featureApi/post/postApi";
-// import Loading from "@/src/components/ui/Loading";
-// import PostDetailsCard from "@/src/components/ui/post/PostDetailsCard";
-// import { useGetMyCommentQuery } from "@/src/redux/features/comment/commentApi";
-// import Comment from "@/src/components/ui/post/comment";
-// import { useGetCurrentUserQuery } from "@/src/redux/features/auth/authApi";
-// import PremiumCard from "@/src/components/ui/PremiumCard";
 
 interface IProps {
   params: {

@@ -227,9 +227,9 @@ export default function PostCard({ post }: { post: TPost }) {
           <EditPost isOpen={isOpen} post={post} onClose={onClose} />
         </div>
 
-        {/* <Link className="block mb-2" href={`/post/${post?._id}`}> */}
+       
         <h1 className="text-lg ">{post?.title}</h1>
-        {/* </Link> */}
+        
 
         {/* <Link className="block mb-2" href={`/post/${post?._id}`}></Link> */}
 
@@ -343,7 +343,7 @@ export default function PostCard({ post }: { post: TPost }) {
           </span>
         )}
 
-        <Link className="block mb-2" href={`/post/${post?._id}`}>
+        <Link className="block mb-2" href={`/news-feed/post/${post?._id}`}>
           <Button className="text-default-500 " size="sm" variant="light">
             <LucideMousePointerClick className="w-5 h-5" />
             <span className="text-yellow-400">Click Here to view</span>
