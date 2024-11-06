@@ -34,6 +34,7 @@ import { useToggleFollowUnfollowUserMutation } from "@/src/redux/featureApi/auth
 import { TPost } from "@/src/types";
 import { useDeletePostMutation, useHandleVotingMutation } from "@/src/redux/featureApi/post/postApi";
 import { TResponse } from "@/src/utils";
+import EditPost from "../../modal/EditPost";
 
 // import { useAppSelector } from "@/src/redux/hook";
 // import EditPostModal from "../../modal/EditPostModal";
@@ -226,7 +227,7 @@ export default function PostCard({ post }: { post: TPost }) {
             </Dropdown>
           )}
 
-          <EditPostModal isOpen={isOpen} post={post} onClose={onClose} />
+          <EditPost isOpen={isOpen} post={post} onClose={onClose} />
         </div>
 
         <Link className="block mb-2" href={`/post/${post?._id}`}>

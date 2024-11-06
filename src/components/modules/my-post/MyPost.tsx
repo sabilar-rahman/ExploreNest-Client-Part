@@ -5,6 +5,7 @@ import { useGetCurrentUserPostQuery } from "@/src/redux/featureApi/post/postApi"
 
 import Loading from "../../Loading";
 import { TPost } from "@/src/types";
+import PostCard from "../post/PostCard";
 
 const MyPost = () => {
   const { data: postData, isLoading: postDataLoading } =
