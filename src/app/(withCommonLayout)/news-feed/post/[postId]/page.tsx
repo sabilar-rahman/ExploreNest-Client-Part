@@ -1,8 +1,10 @@
 "use client";
 
 import Loading from "@/src/components/Loading";
+import Comment from "@/src/components/modules/comment/Comment";
 import PostDetailsCard from "@/src/components/modules/post/PostDetailsCard";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { useGetMyCommentQuery } from "@/src/redux/featureApi/comment/commentApi";
 import { useGetSinglePostQuery } from "@/src/redux/featureApi/post/postApi";
 import { Divider, Spinner } from "@nextui-org/react";
 
@@ -27,7 +29,7 @@ export default function PostDetails({ params }: IProps) {
 
   // getting single post data
   const { data: postData, isLoading: postLoading } = useGetSinglePostQuery(
-    params.postId,
+    params.postId
   );
 
   // getting comments for that individual post
@@ -35,7 +37,7 @@ export default function PostDetails({ params }: IProps) {
     postData?.data?._id,
     {
       skip: postLoading,
-    },
+    }
   );
 
   const isPremiumAndNotVerified =
@@ -46,6 +48,11 @@ export default function PostDetails({ params }: IProps) {
       {postLoading ? (
         <Loading />
       ) : (
+        // <div>
+        //   {isPremiumAndNotVerified && <PremiumCard />}
+        //   <PostDetailsCard postData={postData?.data!} />
+        // </div>
+
         <div>
           {isPremiumAndNotVerified && <PremiumCard />}
           <PostDetailsCard postData={postData?.data!} />
