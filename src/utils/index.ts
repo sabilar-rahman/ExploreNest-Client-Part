@@ -18,17 +18,40 @@ export type TResponse<T> = {
 
 export type TApiResponse<T> = TResponse<T> & BaseQueryApi;
 
+// export type TUser = {
+//   _id: string;
+//   name: string;
+//   email: string;
+//   password: string;
+//   role: string;
+//   img: string;
+//   verified: boolean;
+//   followers: any[];
+//   following: any[];
+//   createdAt: string;
+//   updatedAt: string;
+//   __v: number;
+// };
+
 export type TUser = {
   _id: string;
   name: string;
   email: string;
   password: string;
+  gender: string;
   role: string;
-  img: string;
-  verified: boolean;
+  profileImage: string;
+  bio: any;
+  birthDate: string;
+  status: string;
+  mobileNumber: string;
+  address: any;
+  isVerified: boolean;
   followers: any[];
   following: any[];
+  bookmarkPosts: any[];
   createdAt: string;
   updatedAt: string;
   __v: number;
 };
+
