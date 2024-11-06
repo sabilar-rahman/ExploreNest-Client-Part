@@ -28,22 +28,28 @@ import { Badge } from "@nextui-org/badge";
 import { toast } from "sonner";
 import { useDisclosure } from "@nextui-org/modal";
 import { Tooltip } from "@nextui-org/tooltip";
+import { useAppSelector } from "@/src/redux/hooks";
+import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
+import { useToggleFollowUnfollowUserMutation } from "@/src/redux/featureApi/auth/authApi";
+import { TPost } from "@/src/types";
+import { useDeletePostMutation, useHandleVotingMutation } from "@/src/redux/featureApi/post/postApi";
+import { TResponse } from "@/src/utils";
 
-import EditPostModal from "../../modal/EditPostModal";
+// import { useAppSelector } from "@/src/redux/hook";
+// import EditPostModal from "../../modal/EditPostModal";
 
-import ImageGallery from "./ImageGallery";
+// import ImageGallery from "./ImageGallery";
 
-import { IPost } from "@/src/types/post.type";
-import { useAppSelector } from "@/src/redux/hook";
-import { useCurrentUser } from "@/src/redux/features/auth/authSlice";
-import {
-  useDeletePostMutation,
-  useHandleVotingMutation,
-} from "@/src/redux/features/post/postApi";
-import { useToggleFollowUnfollowUserMutation } from "@/src/redux/features/auth/authApi";
-import { TResponse } from "@/src/types";
+// import { IPost } from "@/src/types/post.type";
+// import { useCurrentUser } from "@/src/redux/features/auth/authSlice";
+// import {
+//   useDeletePostMutation,
+//   useHandleVotingMutation,
+// } from "@/src/redux/features/post/postApi";
+// import { useToggleFollowUnfollowUserMutation } from "@/src/redux/features/auth/authApi";
+// import { TResponse } from "@/src/types";
 
-export default function PostCard({ post }: { post: IPost }) {
+export default function PostCard({ post }: { post: TPost }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // getting current logged in user from redux
@@ -110,7 +116,7 @@ export default function PostCard({ post }: { post: IPost }) {
     };
 
     try {
-      const res = (await deletePost(deletePostData)) as TResponse<IPost>;
+      const res = (await deletePost(deletePostData)) as TResponse<TPost>;
 
       if (res.error) {
         toast.error(res.error.data.message, {

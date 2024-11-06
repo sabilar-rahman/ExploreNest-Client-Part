@@ -1,28 +1,37 @@
-"use client";
 
-import { FieldValues, SubmitHandler } from "react-hook-form";
+
+"use client";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
-import { ChangeEvent, useState } from "react";
+import dynamic from "next/dynamic";
+import { toast } from "sonner";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Checkbox } from "@nextui-org/checkbox";
+import { ChangeEvent, useState } from "react";
 import { FaImage, FaTrash } from "react-icons/fa";
 import { Divider } from "@nextui-org/divider";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-import { toast } from "sonner";
-import { Spinner } from "@nextui-org/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import { Spinner } from "@nextui-org/spinner";
+
+import ENInput from "../form/ENInput";
 import ENSelect from "../form/ENSelect";
 import ENTextArea from "../form/ENTextArea";
-import ENInput from "../form/ENInput";
 import ENForm from "../form/ENForm";
+
+import { postCategoriesOptions } from "./CreatePost";
 import cloudinaryImageUpload from "@/src/helpers/cloudinaryImageUpload";
-import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
-import { useAddPostMutation } from "@/src/redux/featureApi/post/postApi";
-import { TResponse } from "@/src/utils";
 import { TPost } from "@/src/types";
+import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { useUpdatePostMutation } from "@/src/redux/featureApi/post/postApi";
+import { TResponse } from "@/src/utils";
 import { postValidationSchema } from "@/src/schemas/create.post.schema";
 
+// import { useGetCurrentUserQuery } from "@/src/redux/features/auth/authApi";
+// import { IPost } from "@/src/types/post.type";
+// import { postValidationSchema } from "@/src/schemas/post.schema";
+// import { useUpdatePostMutation } from "@/src/redux/features/post/postApi";
+// import { TResponse } from "@/src/types";
+// import uploadImageToCloudinary from "@/src/utils/uploadImageToCloudinary";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -100,32 +109,24 @@ const formats = [
   "image",
 ];
 
-export const postCategoriesOptions = [
-  { key: "Adventure", label: "Adventure" },
-  { key: "Business Travel", label: "Business Travel" },
-  { key: "Exploration", label: "Exploration" },
-  { key: "Budget Travel", label: "Budget Travel" },
-  { key: "Luxury Travel", label: "Luxury Travel" },
-  { key: "Solo Travel", label: "Solo Travel" },
-  { key: "Family Travel", label: "Family Travel" },
-  { key: "Road Trips", label: "Road Trips" },
-];
-
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
+  post: TPost;
 }
 
-const CreatePost = ({ isOpen, onClose }: IProps) => {
-  const [isPremiumContent, setIsPremiumContent] = useState<boolean>(false);
+const EditPost = ({ isOpen, onClose, post }: IProps) => {
+  const [isPremiumContent, setIsPremiumContent] = useState<boolean>(
+    post?.isPremium,
+  );
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(post?.content);
 
   const { data: currentUserData } = useGetCurrentUserQuery({});
 
-  const [handleAddPost, { isLoading: handleAddPostLoading }] =
-    useAddPostMutation();
+  const [handlePostUpdate, { isLoading: handlePostUpdateLoading }] =
+    useUpdatePostMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formData = new FormData();
@@ -143,8 +144,13 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
       formData.append("postImages", image);
     }
 
+    const updatePostData = {
+      data: formData,
+      id: post?._id,
+    };
+
     try {
-      const res = (await handleAddPost(formData)) as TResponse<TPost>;
+      const res = (await handlePostUpdate(updatePostData)) as TResponse<TPost>;
 
       if (res.error) {
         toast.error(res.error.data.message, {
@@ -162,6 +168,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
     }
   };
 
+  // image upload and showing preview
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
@@ -184,6 +191,14 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
   const removeImage = (index: number) => {
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const postDefaultValues = {
+    title: post.title,
+    description: post.description,
+    location: post.location,
+    category: post.category,
+    isPremium: post.isPremium,
   };
 
   return (
@@ -209,6 +224,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
             </ModalHeader>
             <ModalBody className="my-8">
               <ENForm
+                defaultValues={postDefaultValues}
                 resetOnSubmit={true}
                 resolver={zodResolver(postValidationSchema)}
                 onSubmit={onSubmit}
@@ -319,13 +335,13 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
 
                   <div className="flex justify-center mt-6">
                     <Button
-                      className="w-full sm:w-2/3 md:w-1/2 py-2 rounded-lg bg-blue-600 text-white font-semibold transition duration-300 hover:bg-blue-700 mb-6"
-                      isLoading={handleAddPostLoading}
+                      className="w-full sm:w-2/3 md:w-1/2 py-2 rounded-lg bg-blue-600 text-white font-semibold transition duration-300 hover:bg-blue-700"
+                      isLoading={handlePostUpdateLoading}
                       size="lg"
                       spinner={<Spinner color="current" size="sm" />}
                       type="submit"
                     >
-                      Create Post
+                      Update
                     </Button>
                   </div>
                 </div>
@@ -338,4 +354,4 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
   );
 };
 
-export default CreatePost;
+export default EditPost;
