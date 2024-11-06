@@ -29,15 +29,17 @@ import {
 import { Avatar } from "@nextui-org/avatar";
 import NavbarDropDown from "./UI/NavbarDropDown";
 import { useAppSelector } from "../redux/hooks";
-import { useCurrentUser } from "../redux/featureApi/auth/authSlice";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import authCurrentUser from "../redux/featureApi/auth/authCurrentUser";
+
+import { useCurrentUser } from "../redux/featureApi/auth/authSlice";
 
 export const Navbar = () => {
   const router = useRouter();
-  const currentUser = useAppSelector(useCurrentUser);
+  // const currentUser = useAppSelector(useCurrentUser);
   // const currentUser = authCurrentUser();
+  const currentUser = useAppSelector(useCurrentUser);
 
   /* 
   To avoid hydration error,
@@ -89,7 +91,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
 
-        {currentUser?.email ? (
+        {currentUser!== null ?(
           <NavbarItem className="hidden sm:flex gap-2">
             <NavbarDropDown />
           </NavbarItem>

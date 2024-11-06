@@ -8,7 +8,7 @@ import { fontSans } from "@/src/config/fonts";
 import { Navbar } from "@/src/components/navbar";
 import { Providers } from "../lib/providers";
 import { Toaster } from "sonner";
-// import RProvider from "../lib/providers/RProvider";
+import RProvider from "../lib/providers/RProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +34,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <RProvider>
     <html suppressHydrationWarning lang="en">
       <head />
       <body
@@ -45,12 +44,11 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <main className="container mx-auto max-w-7xl  px-6 flex-grow">
-            {children}
+            <RProvider> {children}</RProvider>
             <Toaster richColors />
           </main>
         </Providers>
       </body>
     </html>
-    // </RProvider>
   );
 }
