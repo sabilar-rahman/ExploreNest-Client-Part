@@ -1,285 +1,342 @@
 // "use client";
 
-
-// import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
-
+// import {
+//   FaMapMarkerAlt,
+//   FaCalendarAlt,
+//   FaEnvelope,
+//   FaPhone,
+//   FaUserEdit,
+//   FaUserCheck,
+// } from "react-icons/fa";
+// import { motion } from "framer-motion";
+// import { Card, CardBody, CardHeader } from "@nextui-org/card";
+// import { Avatar } from "@nextui-org/avatar";
+// import { Divider } from "@nextui-org/divider";
+// import { Button } from "@nextui-org/button";
+// import { format } from "date-fns";
 // import Link from "next/link";
+// import { Badge } from "@nextui-org/badge";
+// import { CheckIcon } from "lucide-react";
+// import { useDisclosure } from "@nextui-org/modal";
 
-// const MyProfile = () => {
-//   // const { user } = authCurrentUser();
+// import Loading from "@/src/components/Loading";
+// import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+// // import FollowingModal from "@/src/components/modal/FollowingModal";
+// // import FollowerModal from "@/src/components/modal/FollowerModal";
 
-//   const {data } = useGetCurrentUserQuery({})
+// const ProfilePage = () => {
+//   const {
+//     isOpen: followersModalIsOpen,
+//     onOpen: followersModalOnOpen,
+//     onClose: followersModalOnClose,
+//   } = useDisclosure();
 
+//   const {
+//     isOpen: followingModalIsOpen,
+//     onOpen: followingModalOnOpen,
+//     onClose: followingModalOnClose,
+//   } = useDisclosure();
 
+//   const { data: userData, isLoading: userLoading } =
+//     useGetCurrentUserQuery({});
 
 //   return (
-//     <div className="profile-container max-w-lg mx-auto p-4 bg-white rounded-lg shadow-md mt-8">
-//       {/* Profile Image */}
-//       <div className="flex justify-center mb-4">
-//         <img
-//           src={data?.data?.profileImage || "/default-profile.png"} // Fallback to default image if no profile image exists
-//           alt="Profile"
-//           className="w-24 h-24 rounded-full border-2 border-blue-500"
-//         />
-//       </div>
+//     <div className="container mx-auto px-4 py-8 max-w-4xl">
+//       {userLoading && <Loading />}
+//       <motion.div
+//         animate={{ opacity: 1, y: 0 }}
+//         initial={{ opacity: 0, y: 20 }}
+//         transition={{ duration: 0.5 }}
+//       >
+//         <Card className="bg-background shadow-lg overflow-hidden">
+//           <CardHeader className="relative p-0 mb-4">
+//             <div className="w-full h-48 bg-gradient-to-r from-blue-400 to-blue-600" />
+//             <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-3/4 w-32 h-32">
+//               <Badge
+//                 isOneChar
+//                 className={`${!userData?.data?.isVerified ? "hidden" : ""}`}
+//                 color="success"
+//                 content={<CheckIcon />}
+//                 placement="bottom-right"
+//                 shape="circle"
+//               >
+//                 <Avatar
+//                   isBordered
+//                   className="w-32 h-32"
+//                   color="primary"
+//                   src={userData?.data?.profileImage}
+//                 />
+//               </Badge>
+//             </div>
+//           </CardHeader>
+//           <CardBody className="px-4 pb-8">
+//             <div className="text-center mb-6">
+//               <h1 className="text-3xl font-bold mb-2">
+//                 {userData?.data?.name}
+//               </h1>
+//               <p className="text-default-500 mb-4">
+//                 {userData?.data?.bio
+//                   ? userData?.data?.bio
+//                   : "Bio not provided"}
+//               </p>
+//               <div className="flex items-center justify-center">
+//                 <FaMapMarkerAlt className="text-primary mr-2" />
+//                 <span className="text-default-500">
+//                   {" "}
+//                   {userData?.data?.address
+//                     ? userData?.data?.address
+//                     : "Address not provided"}
+//                 </span>
+//               </div>
+//             </div>
 
-//       {/* User Information */}
-//       <h2 className="text-center text-2xl font-semibold mb-2">{data?.data?.name}</h2>
-//       <h2 className="text-center text-2xl font-semibold mb-2">{data?.data?.email}</h2>
-//       <p className="text-center text-gray-500 mb-4">
-//         Role: {data?.data?.role || "User"}
-//       </p>
+//             <Divider className="my-6" />
 
-//       {/* Followers and Following */}
-//       <div className="flex justify-around text-center mb-4">
-//         <div>
-//           <span className="text-xl font-bold">{data?.data?.followers || 0}</span>
-//           <p className="text-gray-500">Followers</p>
-//         </div>
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//               <div className="space-y-4">
+//                 <div className="flex items-center">
+//                   <FaEnvelope className="text-primary mr-3" />
+//                   <div>
+//                     <p className="text-sm text-default-500">Email</p>
+//                     <p className="font-medium">
+//                       {userData?.data?.email}
+//                     </p>
+//                   </div>
+//                 </div>
+//                 <div className="flex items-center">
+//                   <FaPhone className="text-primary mr-3" />
+//                   <div>
+//                     <p className="text-sm text-default-500">Phone</p>
+//                     <p className="font-medium">
+//                       {userData?.data?.mobileNumber}
+//                     </p>
+//                   </div>
+//                 </div>
+//                 <div className="flex items-center">
+//                   <FaCalendarAlt className="text-primary mr-3" />
+//                   <div>
+//                     <p className="text-sm text-default-500">Birthday</p>
+//                     <p className="font-medium">
+//                       {userData?.data?.birthDate}
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+//               <div className="space-y-4">
+//                 <Button
+//                   color="default"
+//                   style={{
+//                     justifyContent: "space-between",
+//                     display: "flex",
+//                     width: "100%",
+//                     padding: "16px",
+//                     borderRadius: "10px",
+//                   }}
+//                   onPress={followersModalOnOpen}
+//                 >
+//                   <span className="font-medium">Followers</span>
+//                   <span className="text-primary font-bold">
+//                     {userData?.data?.followers?.length}
+//                   </span>
+//                 </Button>
 
-//         <div>
-//           <span className="text-xl font-bold">{data?.data?.following || 0}</span>
-//           <p className="text-gray-500">Following</p>
-//         </div>
-//       </div>
+//                 <Button
+//                   color="default"
+//                   style={{
+//                     justifyContent: "space-between",
+//                     display: "flex",
+//                     width: "100%",
+//                     padding: "16px",
+//                     borderRadius: "10px",
+//                   }}
+//                   onPress={followingModalOnOpen}
+//                 >
+//                   <span className="font-medium">Following</span>
+//                   <span className="text-primary font-bold">
+//                     {userData?.data?.following?.length}
+//                   </span>
+//                 </Button>
+//                 <div className="flex justify-between items-center p-3 bg-default-100 rounded-lg">
+//                   <span className="font-medium">Member since</span>
+//                   {userData?.data?.createdAt && (
+//                     <span className="text-primary font-bold">
+//                       {" "}
+//                       {format(
+//                         new Date(userData?.data?.createdAt),
+//                         "MMM dd, yyyy",
+//                       )}
+//                     </span>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
 
-//       {/* Edit Profile Button */}
-//       <div className="text-center">
-//       <Link href={`/dashboard/edit-profile`}>
-//         <button className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">
-//           Edit Profile
-//         </button>
-//         </Link>
-//       </div>
+//             <Divider className="my-6" />
+
+//             <div className="flex justify-center space-x-4">
+//               <Link href={`/dashboard/edit-profile`}>
+//                 <Button color="primary" startContent={<FaUserEdit />}>
+//                   Edit Profile
+//                 </Button>
+//               </Link>
+//               {!userData?.data?.isVerified && (
+//                 <Link href={`/subscription`}>
+//                   <Button
+//                     color="primary"
+//                     startContent={<FaUserCheck />}
+//                     variant="bordered"
+//                   >
+//                     Verify Profile
+//                   </Button>
+//                 </Link>
+//               )}
+//             </div>
+//           </CardBody>
+//         </Card>
+//       </motion.div>
+
+//       {/* <FollowerModal
+//         isOpen={followersModalIsOpen}
+//         onClose={followersModalOnClose}
+//       />
+//       <FollowingModal
+//         isOpen={followingModalIsOpen}
+//         onClose={followingModalOnClose}
+//       /> */}
 //     </div>
 //   );
 // };
 
-// export default MyProfile;
-
+// export default ProfilePage;
 
 "use client";
 
-import { useState, ChangeEvent } from "react";
-import { Button } from "@nextui-org/button";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { FaEnvelope, FaUserEdit, FaUserCheck } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { toast } from "sonner";
-import { Spinner } from "@nextui-org/spinner";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import ENForm from "@/src/components/form/ENForm";
-import ENInput from "@/src/components/form/ENInput";
-import TSelect from "@/src/components/form/ENSelect";
-import TTextarea from "@/src/components/form/ENTextArea";
-// import Container from "@/src/components/ui/Container";
-import {
-  useGetCurrentUserQuery,
-  useUpdateUserMutation,
-} from "@/src/redux/featureApi/auth/authApi";
+import { Avatar } from "@nextui-org/avatar";
+import { Divider } from "@nextui-org/divider";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
+import { Badge } from "@nextui-org/badge";
+import { CheckIcon } from "lucide-react";
+import { useDisclosure } from "@nextui-org/modal";
 
 import Loading from "@/src/components/Loading";
-import { TResponse, TUser } from "@/src/types";
-import { userUpdateValidationSchema } from "@/src/schemas/auth.schema";
+import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { GoVerified } from "react-icons/go";
 
-const genderOptions = [
-  { key: "male", label: "Male" },
-  { key: "female", label: "Female" },
-  { key: "other", label: "Other" },
-];
+const MyProfile = () => {
+  const {
+    isOpen: followersModalIsOpen,
+    onOpen: followersModalOnOpen,
+    onClose: followersModalOnClose,
+  } = useDisclosure();
 
-const EditProfilePage = () => {
-  const [imageFile, setImageFile] = useState<File | "">("");
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const {
+    isOpen: followingModalIsOpen,
+    onOpen: followingModalOnOpen,
+    onClose: followingModalOnClose,
+  } = useDisclosure();
 
-  const [updateUser, { isLoading: updateUserLoading }] =
-    useUpdateUserMutation();
-
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const formData = new FormData();
-
-    const userData = {
-      ...data,
-    };
-
-    formData.append("userData", JSON.stringify(userData));
-
-    formData.append("profileImage", imageFile);
-
-    try {
-      const res = (await updateUser(formData)) as TResponse<TUser>;
-
-      if (res.error) {
-        toast.error(res.error.data.message, {
-          duration: 2000,
-        });
-      } else {
-        toast.success("User updated successfully", {
-          duration: 2000,
-        });
-      }
-    } catch (error) {
-      toast.error("Something went wrong", { duration: 2000 });
-    }
-  };
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      setImageFile(file);
-
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const { data: currentUserData, isLoading: currentUserLoading } =
-    useGetCurrentUserQuery({});
-
-  const userData = currentUserData?.data;
-
-  const userDefaultValues = {
-    name: userData?.name || "",
-    email: userData?.email || "",
-    gender: userData?.gender || "",
-    bio: userData?.bio || "",
-    mobileNumber: userData?.mobileNumber || "",
-    birthDate: userData?.birthDate || "",
-    address: userData?.address || "",
-  };
+  const { data: userData, isLoading: userLoading } = useGetCurrentUserQuery({});
 
   return (
-    <div className="container mx-auto">
-      {currentUserLoading ? (
-        <Loading />
-      ) : (
-        <Card className="w-full max-w-3xl mx-auto">
-          <CardHeader className="flex flex-col items-center pb-0 pt-6 px-4">
-            <h1 className="text-2xl font-bold mb-4">Edit Profile</h1>
-            <div className="relative mb-6">
-              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200">
-                {imagePreview ? (
-                  <img
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                    src={imagePreview}
-                  />
-                ) : (
-                  <img
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                    src={currentUserData?.data?.profileImage}
-                  />
-                )}
-              </div>
-              <label
-                className="absolute bottom-0 right-0 bg-primary text-white rounded-full p-2 cursor-pointer"
-                htmlFor="profile-image"
-              >
-                <span className="hidden">upload profile</span>
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                  />
-                  <path
-                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                  />
-                </svg>
-              </label>
-              <input
-                accept="image/*"
-                className="hidden"
-                id="profile-image"
-                type="file"
-                onChange={handleImageChange}
-              />
-            </div>
-          </CardHeader>
-          <CardBody className="px-4 py-6">
-            <ENForm
-              defaultValues={userDefaultValues}
-              resetOnSubmit={false}
-              resolver={zodResolver(userUpdateValidationSchema)}
-              onSubmit={onSubmit}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="py-2">
-                  <ENInput label="Name" name="name" type="text" />
-                </div>
-                <div className="py-2">
-                  <TSelect
-                    label="Gender"
-                    name="gender"
-                    options={genderOptions}
-                    placeholder="Select your gender"
-                  />
-                </div>
-                <div className="py-2">
-                  <ENInput
-                    isDisabled={true}
-                    label="Email (Can't be changed)"
-                    name="email"
-                    type="email"
-                  />
-                </div>
-                <div className="py-2">
-                  <ENInput
-                    label="Mobile Number"
-                    name="mobileNumber"
-                    type="text"
-                  />
-                </div>
-                <div className="py-2">
-                  <ENInput
-                    isDisabled={true}
-                    label="Birth date (Can't be changed)"
-                    name="birthDate"
-                    type="text"
-                  />
-                </div>
-                <div className="py-2">
-                  <ENInput label="Address" name="address" type="text" />
-                </div>
-                <div className="py-2 sm:col-span-2">
-                  <TTextarea label="Bio" name="bio" />
-                </div>
-              </div>
+    <div className="container mx-auto px-2 py-2 ">
+      {userLoading && <Loading />}
 
-              <div className="w-full flex justify-center">
-                <Button
-                  className="w-2/5  py-2 mt-6 rounded-lg bg-blue-600 text-white font-semibold transition duration-300 transform hover:scale-105"
-                  isLoading={updateUserLoading}
-                  size="lg"
-                  spinner={<Spinner color="default" size="sm" />}
-                  type="submit"
-                >
-                  Update
+      <Card className="bg-background shadow-lg overflow-hidden">
+        <h1 className="text-2xl text-center font-bold ">Profile Information</h1>
+        <CardHeader className="relative p-0 ">
+          <div className="w-full h-48 bg-white" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Badge
+              isOneChar
+              className={`${!userData?.data?.isVerified ? "hidden" : ""}`}
+              content={<GoVerified />}
+              placement="top-right"
+              shape="circle"
+              size="lg"
+              color="danger"
+            >
+              <Avatar
+                isBordered
+                className="w-48 h-32"
+                radius="sm"
+                src={userData?.data?.profileImage}
+              />
+            </Badge>
+          </div>
+        </CardHeader>
+        <CardBody className="px-4 pb-3">
+          <div className="text-center space-y-4">
+            <h1 className="text-3xl font-bold mb-2">{userData?.data?.name}</h1>
+
+            {!userData?.data?.isVerified && (
+              <Link href={`/subscription`}>
+                <Button startContent={<GoVerified />} variant="bordered">
+                  Verify Profile
                 </Button>
-              </div>
-            </ENForm>
-          </CardBody>
-        </Card>
-      )}
+              </Link>
+            )}
+
+            <div className="flex items-center justify-center py-2 ">
+              <FaEnvelope className=" mr-2" />
+              <p className="font-medium">{userData?.data?.email}</p>
+            </div>
+          </div>
+
+          
+
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6 ">
+            <Button
+              color="default"
+              // style={{
+              //   justifyContent: "space-around",
+              //   display: "flex",
+              //   width: "100%",
+              //   padding: "16px",
+              //   borderRadius: "10px",
+              // }}
+              onPress={followersModalOnOpen}
+              variant="bordered"
+            >
+              <span className="font-medium">Followers :</span>
+              <span className=" font-bold">
+                {userData?.data?.followers?.length}
+              </span>
+            </Button>
+
+            <Button
+              color="default"
+              // style={{
+              //   justifyContent: "space-between",
+              //   display: "flex",
+              //   width: "100%",
+              //   padding: "16px",
+              //   borderRadius: "10px",
+              // }}
+              onPress={followingModalOnOpen}
+              variant="bordered"
+            >
+              <span className="font-medium">Following :</span>
+              <span className="font-bold">
+                {userData?.data?.following?.length}
+              </span>
+            </Button>
+          </div>
+
+         
+
+          <div className="flex justify-center space-x-4 mt-4">
+            <Link href={`/dashboard/edit-profile`}>
+              <Button>Edit Profile</Button>
+            </Link>
+          </div>
+        </CardBody>
+      </Card>
     </div>
   );
 };
 
-export default EditProfilePage;
-
+export default MyProfile;

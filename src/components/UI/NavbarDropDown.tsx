@@ -197,11 +197,7 @@ const NavbarDropdown = () => {
       <Badge
         isOneChar
         className={`${!user?.data?.isVerified ? "hidden" : ""}`}
-        content={
-         
-            <GoVerified />
-       
-        }
+        content={<GoVerified />}
         placement="top-right"
         shape="circle"
         size="lg"
