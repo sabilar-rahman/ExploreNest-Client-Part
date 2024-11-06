@@ -13,17 +13,17 @@ import { Spinner } from "@nextui-org/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 
-import TSelect from "../form/TSelect";
-import TTextarea from "../form/TTextArea";
-import TInput from "../form/TInput";
-import TForm from "../form/TForm";
+import ENSelect from "../form/ENSelect";
+import ENTextArea from "../form/ENTextArea";
+import ENInput from "../form/ENInput";
+import ENForm from "../form/ENForm";
 
-import { IPost } from "@/src/types/post.type";
-import { TResponse } from "@/src/types";
-import { useAddPostMutation } from "@/src/redux/features/post/postApi";
-import uploadImageToCloudinary from "@/src/utils/uploadImageToCloudinary";
-import { useGetCurrentUserQuery } from "@/src/redux/features/auth/authApi";
-import { postValidationSchema } from "@/src/schemas/post.schema";
+// import { IPost } from "@/src/types/post.type";
+// import { TResponse } from "@/src/types";
+// import { useAddPostMutation } from "@/src/redux/features/post/postApi";
+// import uploadImageToCloudinary from "@/src/utils/uploadImageToCloudinary";
+// import { useGetCurrentUserQuery } from "@/src/redux/features/auth/authApi";
+// import { postValidationSchema } from "@/src/schemas/post.schema";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -72,7 +72,7 @@ const modules = {
                 id: toastId,
               });
               const quill = (this as any).quill;
-              const range = quill.getSelection();
+              const range = quill.geENSelection();
 
               if (range) {
                 quill.insertEmbed(range.index, "image", url);
@@ -209,7 +209,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
               <h2 className="text-xl font-bold">Edit Comment</h2>
             </ModalHeader>
             <ModalBody className="my-8">
-              <TForm
+              <ENForm
                 resetOnSubmit={true}
                 resolver={zodResolver(postValidationSchema)}
                 onSubmit={onSubmit}
@@ -217,10 +217,10 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="sm:col-span-2">
-                      <TInput label="Title" name="title" type="text" />
+                      <ENInput label="Title" name="title" type="text" />
                     </div>
                     <div>
-                      <TSelect
+                      <ENSelect
                         label="Category"
                         name="category"
                         options={postCategoriesOptions}
@@ -228,7 +228,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                       />
                     </div>
                     <div>
-                      <TInput label="Location" name="location" type="text" />
+                      <ENInput label="Location" name="location" type="text" />
                     </div>
                     {currentUserData?.data?.isVerified && (
                       <div className="sm:col-span-2 flex items-center">
@@ -247,7 +247,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                   </div>
 
                   <div>
-                    <TTextarea label="Short Description" name="description" />
+                    <ENTextArea label="Short Description" name="description" />
                   </div>
 
                   <Divider className="my-4" />
@@ -330,7 +330,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     </Button>
                   </div>
                 </div>
-              </TForm>
+              </ENForm>
             </ModalBody>
           </>
         )}
