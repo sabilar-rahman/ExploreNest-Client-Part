@@ -173,7 +173,7 @@ const adminRoutes = [
   {
     item: "Posts Management",
 
-    link: "/admin/dashboard/allpost",
+    link: "/admin/dashboard/postManagement",
   },
   {
     item: "Payment History",
