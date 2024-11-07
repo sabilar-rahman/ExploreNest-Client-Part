@@ -95,6 +95,8 @@ const NewFeedspost = () => {
           <PostCard key={post?._id} post={post} />
         ))}
       </div>
+
+      
     </div>
   );
 };
