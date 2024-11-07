@@ -142,12 +142,13 @@ import { CiGrid42 } from "react-icons/ci";
 import { FaDollarSign } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RiEditLine } from "react-icons/ri";
-import { Menu } from "lucide-react";
+import { LucideMousePointerClick, Menu } from "lucide-react";
 import { BsBookmarks } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { logout } from "@/src/redux/featureApi/auth/authSlice";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { FcHome } from "react-icons/fc";
 
 const userRoutes = [
   { item: "User Profile", link: "/dashboard/profile" },
@@ -235,8 +236,10 @@ const Sidebar = () => {
           <div className="p-4">
             <div className="flex items-center justify-between">
               <Link className="flex items-center space-x-2" href="/">
-                Explore
-                <span className="text-xl font-semibold">Explore Nest</span>
+                <FcHome size={24} />
+                <span className="flex items-center text-xl font-semibold">
+                  Home <LucideMousePointerClick />
+                </span>
               </Link>
               <Button
                 isIconOnly
@@ -248,8 +251,6 @@ const Sidebar = () => {
               </Button>
             </div>
           </div>
-
-          <Divider />
 
           <nav className="flex-grow overflow-y-auto p-4 space-y-6">
             {/* {links.map((item) => (

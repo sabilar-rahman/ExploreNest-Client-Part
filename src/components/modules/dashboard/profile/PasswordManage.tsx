@@ -57,12 +57,9 @@ const PasswordManage = () => {
 
   return (
     <div className='container mx-auto'>
-          <div className="w-full max-w-xl mx-auto py-10">
+          <div className="container mx-auto py-10">
      
-        <p className="text-gray-500 mb-6">
-        Change Password
-        </p>
-
+        
         <ENForm
           resolver={zodResolver(changePasswordValidationSchema)}
           onSubmit={onSubmit}
