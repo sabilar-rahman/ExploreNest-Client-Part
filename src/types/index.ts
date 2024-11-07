@@ -54,3 +54,6 @@ export interface TPost {
   location: string;
   commentCount: number;
 }
+
+
+
