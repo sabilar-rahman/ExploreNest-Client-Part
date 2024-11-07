@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -22,36 +23,41 @@ export default function RegisterPage() {
   const dispatch = useAppDispatch();
   const route = useRouter();
 
-  //   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
-
-  //   useEffect(() => {
-  //     if (isPending) {
-  //       // Handle Loading satate
-  //     }
-  //   }, [isPending]);
+  const [hydration, setHydration] = useState(false);
+  useEffect(() => {
+    setHydration(true);
+  }, []);
+  /* If the component hasn't mounted yet,
+  return null to avoid rendering mismatched content
+ */
+  if (!hydration) {
+    return null;
+  }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-   
-
     try {
       const userData = {
         ...data,
-        img: "https://images.pexels.com/photos/279949/pexels-photo-279949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        profileImage:
+          "https://images.pexels.com/photos/279949/pexels-photo-279949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       };
 
       console.log("Inside form user data: ", userData);
 
       // handleUserRegistration(userData);
 
-      dispatch(setUser(userData));
+      // dispatch(setUser(userData));
 
       const res = await signUp(userData).unwrap();
 
       toast.success("Registered Successfully");
-      route.push("/");
+
+      // Reset the form after successful registration
+      
     } catch (error) {
       toast.error("Unable  to register");
     }
+    route.push("/login");
   };
 
   return (

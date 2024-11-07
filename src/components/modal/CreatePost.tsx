@@ -103,11 +103,11 @@ export const postCategoriesOptions = [
   { key: "Adventure", label: "Adventure" },
   { key: "Business Travel", label: "Business Travel" },
   { key: "Exploration", label: "Exploration" },
-  { key: "Budget Travel", label: "Budget Travel" },
-  { key: "Luxury Travel", label: "Luxury Travel" },
-  { key: "Solo Travel", label: "Solo Travel" },
-  { key: "Family Travel", label: "Family Travel" },
-  { key: "Road Trips", label: "Road Trips" },
+  // { key: "Budget Travel", label: "Budget Travel" },
+  // { key: "Luxury Travel", label: "Luxury Travel" },
+  // { key: "Solo Travel", label: "Solo Travel" },
+  // { key: "Family Travel", label: "Family Travel" },
+  // { key: "Road Trips", label: "Road Trips" },
 ];
 
 interface IProps {
@@ -227,9 +227,9 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     </div>
 
  
-                     <div>
+                     {/* <div>
                       <ENInput label="Location" name="location" type="text" />
-                    </div> 
+                    </div>  */}
 
 
                     {currentUserData?.data?.isVerified && (
@@ -246,9 +246,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     )}
                   </div>
 
-                  <div>
-                    <ENTextArea label="Short Description" name="description" />
-                  </div>
+                 
 
                   {/* <Divider className="my-4" /> */}
 
@@ -313,6 +311,10 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     value={value}
                     onChange={setValue}
                   />
+
+<div>
+                    <ENTextArea label="Short Description" name="description" />
+                  </div>
 
                   <div className="flex justify-center mt-6">
                     <Button

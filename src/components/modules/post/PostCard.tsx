@@ -191,7 +191,7 @@ export default function PostCard({ post }: { post: TPost }) {
                 className={`${
                   post?.author?.followers?.includes(user?._id)
                     ? "bg-success text-white"
-                    : "bg-primary text-white"
+                    : "bg-secondary text-white"
                 } flex items-center rounded-full `}
                 disabled={user === null}
                 isLoading={handleFollowLoading}
@@ -201,11 +201,11 @@ export default function PostCard({ post }: { post: TPost }) {
               >
                 {post?.author?.followers?.includes(user?._id) ? (
                   <>
-                    <FiUserCheck className=" mr-1 w-5 h-5" /> Unfollow
+                    {/* <FiUserCheck className=" mr-1 w-5 h-5" />  */}Unfollow
                   </>
                 ) : (
                   <>
-                    <FiUserPlus className=" mr-1 w-5 h-5" /> Follow
+                    {/* <FiUserPlus className=" mr-1 w-5 h-5" />  */}Follow
                   </>
                 )}
               </Button>
@@ -220,7 +220,7 @@ export default function PostCard({ post }: { post: TPost }) {
               <DropdownMenu aria-label="Comment actions">
                 <DropdownItem
                   key="edit"
-                  startContent={<Edit2 className="w-4 h-4" />}
+                  // startContent={<Edit2 className="w-4 h-4" />}
                   onPress={onOpen}
                 >
                   Edit Post
@@ -229,7 +229,7 @@ export default function PostCard({ post }: { post: TPost }) {
                   key="delete"
                   className="text-danger"
                   color="danger"
-                  startContent={<Trash2 className="w-4 h-4" />}
+                  // startContent={<Trash2 className="w-4 h-4" />}
                   onPress={() => handleDeletePost(post?._id)}
                 >
                   Delete

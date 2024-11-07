@@ -114,7 +114,7 @@ const AllPost = () => {
           <SelectItem key="Exploration" value="Exploration">
             Exploration
           </SelectItem>
-          <SelectItem key="Budget Travel" value="Budget Travel">
+          {/* <SelectItem key="Budget Travel" value="Budget Travel">
             Budget Travel
           </SelectItem>
           <SelectItem key="Luxury Travel" value="Luxury Travel">
@@ -128,7 +128,7 @@ const AllPost = () => {
           </SelectItem>
           <SelectItem key="RoadTrips" value="Road Trips">
             Road Trips
-          </SelectItem>
+          </SelectItem> */}
         </Select>
 
         <Button color="danger" onClick={handleReset}>

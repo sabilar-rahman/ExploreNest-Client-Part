@@ -1,5 +1,3 @@
-
-
 "use client";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
@@ -69,7 +67,7 @@ const modules = {
 
             if (file.size > 10485760) {
               return toast.warning(
-                "File size exceeds 10 MB limit. Please select a smaller file.",
+                "File size exceeds 10 MB limit. Please select a smaller file."
               );
             }
             const url = await cloudinaryImageUpload(file);
@@ -117,7 +115,7 @@ interface IProps {
 
 const EditPost = ({ isOpen, onClose, post }: IProps) => {
   const [isPremiumContent, setIsPremiumContent] = useState<boolean>(
-    post?.isPremium,
+    post?.isPremium
   );
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
@@ -157,7 +155,7 @@ const EditPost = ({ isOpen, onClose, post }: IProps) => {
           duration: 2000,
         });
       } else {
-        toast.success("Post created successfully", {
+        toast.success("Post updated successfully", {
           duration: 2000,
         });
       }
@@ -242,9 +240,13 @@ const EditPost = ({ isOpen, onClose, post }: IProps) => {
                         placeholder="Select your post category"
                       />
                     </div>
-                    <div>
+
+
+                    {/* <div>
                       <ENInput label="Location" name="location" type="text" />
-                    </div>
+                    </div> */}
+
+
                     {currentUserData?.data?.isVerified && (
                       <div className="sm:col-span-2 flex items-center">
                         <Checkbox
@@ -261,11 +263,7 @@ const EditPost = ({ isOpen, onClose, post }: IProps) => {
                     )}
                   </div>
 
-                  <div>
-                    <ENTextArea label="Short Description" name="description" />
-                  </div>
-
-                  <Divider className="my-4" />
+                  {/* <Divider className="my-4" /> */}
 
                   <div>
                     <label
@@ -332,6 +330,10 @@ const EditPost = ({ isOpen, onClose, post }: IProps) => {
                     value={value}
                     onChange={setValue}
                   />
+
+                  <div>
+                    <ENTextArea label="Short Description" name="description" />
+                  </div>
 
                   <div className="flex justify-center mt-6">
                     <Button

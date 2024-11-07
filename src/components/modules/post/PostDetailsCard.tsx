@@ -82,7 +82,6 @@ const PostDetailsCard = ({ postData }: IProps) => {
       };
 
       await handleFollow(followData);
-    
     }
   };
 
@@ -198,10 +197,10 @@ const PostDetailsCard = ({ postData }: IProps) => {
             <div className="ml-4">
               {" "}
               <p className="font-semibold text-lg">{postData?.author?.name}</p>
-              post date:
+              {/* post date:
               <p className="text-sm text-default-500">
                 {format(new Date(postData?.createdAt!), "dd-MMM-yyyy")}
-              </p>
+              </p> */}
               <p className="text-sm text-default-500">
                 Followers: {postData?.author?.followers?.length}
               </p>
@@ -220,7 +219,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
                   className={`${
                     postData?.author?.followers.includes(user?._id)
                       ? "bg-success text-white"
-                      : "bg-primary text-white"
+                      : "bg-secondary text-white"
                   } flex items-center rounded-full`}
                   disabled={user === null}
                   isLoading={handleFollowLoading}
@@ -230,12 +229,10 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 >
                   {postData?.author?.followers.includes(user?._id) ? (
                     <>
-                      <FiUserCheck className="mr-1 w-5 h-5" /> Unfollow
+                      {/* <FiUserCheck className="mr-1 w-5 h-5" />  */}Unfollow
                     </>
                   ) : (
-                    <>
-                      <FiUserPlus className="mr-1 w-5 h-5" /> Follow
-                    </>
+                    <>{/* <FiUserPlus className="mr-1 w-5 h-5" />  */}Follow</>
                   )}
                 </Button>
               </Tooltip>
@@ -305,6 +302,13 @@ const PostDetailsCard = ({ postData }: IProps) => {
           <span className="text-default-600">{postData?.location}</span>
         </div> */}
 
+        <div className="flex items-center text-center text-sm ">
+          Posted Date:
+          <p className=" ">
+            {format(new Date(postData?.createdAt), "dd MMM,yyyy")}
+          </p>
+        </div>
+
         <div className="flex flex-wrap gap-2 mb-4">
           {/* <span className="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">
             {postData?.category}
@@ -346,7 +350,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
               isDisabled={user !== null}
             >
               <Button
-              onPress={handleCreatePostClick}
+                onPress={handleCreatePostClick}
                 color={
                   !postData?.upvote?.includes(user?._id || "")
                     ? "default"
@@ -368,7 +372,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
               isDisabled={user !== null}
             >
               <Button
-              onPress={handleCreatePostClick}
+                onPress={handleCreatePostClick}
                 color={
                   !postData?.downvote?.includes(user?._id || "")
                     ? "default"

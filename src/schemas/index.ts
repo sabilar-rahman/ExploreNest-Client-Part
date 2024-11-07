@@ -1,6 +1,6 @@
 import { z } from "zod";
 
 export const commentValidationSchema = z.object({
-  comment: z.string().trim().min(1, "Comment cannot be empty"),
+  comment: z.string().trim().min(1, "please enter a comment"),
 });
 
