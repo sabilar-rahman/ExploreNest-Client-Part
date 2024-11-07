@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 
 const loading = () => {
   return (
-    <div>
+    <div >
       <Loading />
     </div>
   );

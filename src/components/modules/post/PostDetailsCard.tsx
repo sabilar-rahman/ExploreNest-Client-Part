@@ -82,6 +82,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
       };
 
       await handleFollow(followData);
+    
     }
   };
 

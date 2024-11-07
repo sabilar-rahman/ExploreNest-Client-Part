@@ -166,9 +166,9 @@ const adminRoutes = [
   { item: "Edit Profile", link: "/dashboard/edit-profile" },
   { item: "My Content", link: "/dashboard/my-content" },
   {
-    item: "Users Management",
+    item: "User Management",
 
-    link: "/admin/dashboard/alluser",
+    link: "/admin/dashboard/userManagement",
   },
   {
     item: "Posts Management",
