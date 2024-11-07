@@ -71,8 +71,6 @@ const PostDetailsCard = ({ postData }: IProps) => {
   const [handleBookMarkPost, { isLoading: handleBookMarkPostLoading }] =
     useToggleBookMarkPostMutation();
 
-    
-
   // handle user follow rtk query
   const [handleFollow, { isLoading: handleFollowLoading }] =
     useToggleFollowUnfollowUserMutation();
@@ -161,6 +159,13 @@ const PostDetailsCard = ({ postData }: IProps) => {
 
   const { data: currentUserData } = useGetCurrentUserQuery({});
 
+  const handleCreatePostClick = () => {
+    if (!user) {
+      toast.error("You need to login first!");
+    } else {
+    }
+  };
+
   const bookmarkedPostId = currentUserData?.data?.bookmarkPosts?.map(
     (item: { _id: any }) => item._id
   );
@@ -192,7 +197,6 @@ const PostDetailsCard = ({ postData }: IProps) => {
             <div className="ml-4">
               {" "}
               <p className="font-semibold text-lg">{postData?.author?.name}</p>
-
               post date:
               <p className="text-sm text-default-500">
                 {format(new Date(postData?.createdAt!), "dd-MMM-yyyy")}
@@ -203,15 +207,15 @@ const PostDetailsCard = ({ postData }: IProps) => {
             </div>
           </div>
           <div className="flex gap-2">
-            
             {user?._id !== postData?.author?._id && (
               <Tooltip
                 closeDelay={2000}
-                color="warning"
-                content="Login First"
+                color="danger"
+                content="You need to login first!"
                 isDisabled={user !== null}
               >
                 <Button
+                  onPress={handleCreatePostClick}
                   className={`${
                     postData?.author?.followers.includes(user?._id)
                       ? "bg-success text-white"
@@ -237,11 +241,10 @@ const PostDetailsCard = ({ postData }: IProps) => {
             )}
             <Tooltip
               closeDelay={2000}
-              color="warning"
-              content="Login First"
+              color="danger"
+              content="You need to login first!"
               isDisabled={user !== null}
             >
-
               {/* <Button
                 className={
                   bookmarkedPostId?.includes(postData?._id)
@@ -261,8 +264,6 @@ const PostDetailsCard = ({ postData }: IProps) => {
                   <FaRegBookmark className="w-5 h-5" />
                 )}
               </Button> */}
-
-
             </Tooltip>
             {user?._id === postData?.author?._id && (
               <Dropdown>
@@ -298,18 +299,15 @@ const PostDetailsCard = ({ postData }: IProps) => {
         {/* post title */}
         <h1 className="text-lg">{postData?.title}</h1>
 
-
         {/* <div className="flex items-center mb-2">
           <MapPin className="w-5 h-5 text-default-500 mr-2" />
           <span className="text-default-600">{postData?.location}</span>
         </div> */}
 
         <div className="flex flex-wrap gap-2 mb-4">
-
           {/* <span className="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">
             {postData?.category}
           </span> */}
-
 
           {/* {postData?.isPremium && (
             <span className="bg-warning/10 text-warning text-sm font-medium px-3 py-1 rounded-full">
@@ -317,44 +315,37 @@ const PostDetailsCard = ({ postData }: IProps) => {
             </span>
           )} */}
         </div>
-
-        
-        
       </CardHeader>
-
-      
 
       {/* image gallery */}
       <CardBody className="px-6 py-4">
         {postData?.images && (
           <DetailPageImageGallery images={postData?.images} />
         )}
-        
+
         {/* post details */}
         <p className="text-lg text-default-700 dark:text-gray-300 ">
           {postData?.description}
         </p>
-        
+
         <div
           dangerouslySetInnerHTML={{ __html: postData?.content }}
           className="mt-2 prose dark:prose-invert max-w-none"
         />
-        
-
-        
       </CardBody>
-     
+
       {/* post upvote downvote and share button on the cart foot */}
       <CardFooter className="px-6 py-4">
         <div className="flex justify-between items-center w-full">
           <div className="flex space-x-4">
             <Tooltip
               closeDelay={2000}
-              color="warning"
-              content="Login First"
+              color="danger"
+              content="You need to login first!"
               isDisabled={user !== null}
             >
               <Button
+              onPress={handleCreatePostClick}
                 color={
                   !postData?.upvote?.includes(user?._id || "")
                     ? "default"
@@ -368,15 +359,15 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 <BiUpvote className="w-5 h-5 mr-2" />
                 <span>{postData?.upvote?.length}</span>
               </Button>
-              
             </Tooltip>
             <Tooltip
               closeDelay={2000}
-              color="warning"
-              content="Login First"
+              color="danger"
+              content="You need to login first!"
               isDisabled={user !== null}
             >
               <Button
+              onPress={handleCreatePostClick}
                 color={
                   !postData?.downvote?.includes(user?._id || "")
                     ? "default"
@@ -387,22 +378,18 @@ const PostDetailsCard = ({ postData }: IProps) => {
                 variant="flat"
                 onClick={() => handleDownvote(postData?._id)}
               >
-                <BiDownvote  className="w-5 h-5 mr-2" />
+                <BiDownvote className="w-5 h-5 mr-2" />
                 <span>{postData?.downvote?.length}</span>
               </Button>
             </Tooltip>
-
-
-            
           </div>
 
           {postData?.isPremium && (
-          <span className="flex items-center gap-1 mb-2 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 text-xs font-semibold px-2.5 py-0.5 rounded">
-            <PiCrown className="w-4 h-4" />
-            Premium
-          </span>
-        )}
-
+            <span className="flex items-center gap-1 mb-2 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 text-xs font-semibold px-2.5 py-0.5 rounded">
+              <PiCrown className="w-4 h-4" />
+              Premium
+            </span>
+          )}
         </div>
       </CardFooter>
     </Card>

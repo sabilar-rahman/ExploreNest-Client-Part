@@ -82,7 +82,7 @@ const Comment = ({ commentData }: IProps) => {
               <Tooltip
                 closeDelay={2000}
                 color="warning"
-                content="Login First"
+                content="You need to login first!"
                 isDisabled={user !== null}
               >
                 <Button

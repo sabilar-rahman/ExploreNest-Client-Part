@@ -133,6 +133,17 @@ export default function PostCard({ post }: { post: TPost }) {
     }
   };
 
+  const handleCreatePostClick = () => {
+    if (!user) {
+      toast.error("You need to login first!");
+    } else {
+      
+    }
+  };
+
+
+
+
   return (
     <Card className="max-w-4xl w-full mx-auto">
       <CardBody className="p-2">
@@ -171,11 +182,12 @@ export default function PostCard({ post }: { post: TPost }) {
           {user?._id !== post?.author?._id ? (
             <Tooltip
               closeDelay={2000}
-              color="warning"
-              content="Login First"
+              color="danger"
+              content="You need to login first!"
               isDisabled={user !== null}
             >
               <Button
+              onPress={handleCreatePostClick}
                 className={`${
                   post?.author?.followers?.includes(user?._id)
                     ? "bg-success text-white"
@@ -292,11 +304,12 @@ export default function PostCard({ post }: { post: TPost }) {
         <div className="flex space-x-4 mb-2 sm:mb-0">
           <Tooltip
             closeDelay={2000}
-            color="warning"
-            content="Login First"
+            color="danger"
+            content="You need to login first!"
             isDisabled={user !== null}
           >
             <Button
+            onPress={handleCreatePostClick}
               className={`${!post?.upvote?.includes(user?._id || "") ? "text-default-500" : "text-black"}`}
               disabled={user === null}
               size="sm"
@@ -310,11 +323,12 @@ export default function PostCard({ post }: { post: TPost }) {
           </Tooltip>
           <Tooltip
             closeDelay={2000}
-            color="warning"
-            content="Login First"
+            color="danger"
+            content="You need to login first!"
             isDisabled={user !== null}
           >
             <Button
+            onPress={handleCreatePostClick}
               className={`${!post?.downvote?.includes(user?._id || "") ? "text-default-500" : "text-black"}`}
               disabled={user === null}
               size="sm"
