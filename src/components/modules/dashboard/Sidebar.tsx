@@ -157,7 +157,7 @@ const userRoutes = [
   {
     item: "Change Password",
 
-    link: "/dashboard/change-password",
+    link: "/dashboard/changePassword",
   },
 ];
 
@@ -184,7 +184,7 @@ const adminRoutes = [
   {
     item: "Change Password",
 
-    link: "/dashboard/change-password",
+    link: "/dashboard/changePassword",
   },
 ];
 
