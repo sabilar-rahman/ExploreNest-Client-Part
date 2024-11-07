@@ -10,7 +10,7 @@
 // // import { logout, setUser } from "../featureApi/auth/authSlice";
 
 // // const baseQuery = fetchBaseQuery({
-// //   baseUrl: "http://localhost:5000/api",
+// //   baseUrl: "https://explore-nest-server-swart.vercel.app/api",
 // //   credentials: "include",
 // //   prepareHeaders: (headers, { getState }) => {
 // //     // const token = (getState() as RootState).auth.token;
@@ -38,7 +38,7 @@
 // //     //* Send Refresh
 // //     console.log("Sending refresh token");
 
-// //     const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+// //     const res = await fetch("https://explore-nest-server-swart.vercel.app/api/auth/refresh-token", {
 // //       method: "POST",
 // //       credentials: "include",
 // //     });
@@ -78,7 +78,7 @@
 // import { setUser } from '../featureApi/auth/authSlice';
 
 // const baseQuery = fetchBaseQuery({
-//   baseUrl: 'http://localhost:5000/api',
+//   baseUrl: 'https://explore-nest-server-swart.vercel.app/api',
 //   credentials : 'include',
 //   prepareHeaders : (headers, {getState}) => {
 //     const token = (getState() as RootState).auth.token;
@@ -95,7 +95,7 @@
 //   console.log(result);
 
 //   if(result.error?.status === 401){
-//     const res = await fetch('http://localhost:5000/api/auth/refresh-token', {
+//     const res = await fetch('https://explore-nest-server-swart.vercel.app/api/auth/refresh-token', {
 //       credentials : 'include'
 //     });
 
@@ -135,7 +135,7 @@ import { logout, setUser } from "../featureApi/auth/authSlice";
 
 // main base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://explore-nest-server-swart.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
@@ -158,7 +158,7 @@ const BaseQueryWithRefreshToken: BaseQueryFn<
 
   if (result?.error?.status === 401) {
     const res = await fetch(
-      "http://localhost:5000/api/auth/refresh-token",
+      "https://explore-nest-server-swart.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",
