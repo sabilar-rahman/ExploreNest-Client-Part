@@ -203,6 +203,7 @@ const PostDetailsCard = ({ postData }: IProps) => {
             </div>
           </div>
           <div className="flex gap-2">
+            
             {user?._id !== postData?.author?._id && (
               <Tooltip
                 closeDelay={2000}

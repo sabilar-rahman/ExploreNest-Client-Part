@@ -149,50 +149,43 @@ import { useAppDispatch } from "@/src/redux/hooks";
 import { logout } from "@/src/redux/featureApi/auth/authSlice";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
 
-
-
-
-
-
 const userRoutes = [
-  { item: "Profile", icon: CgProfile, link: "/dashboard/profile" },
-  { item: "My Content", icon: CiGrid42, link: "/dashboard/my-content" },
-  { item: "Bookmark", icon: BsBookmarks, link: "/dashboard/bookmark" },
-  { item: "Edit Profile", icon: RiEditLine, link: "/dashboard/edit-profile" },
+  { item: "User Profile", link: "/dashboard/profile" },
+  { item: "Edit Profile", link: "/dashboard/edit-profile" },
+  { item: "My Content", link: "/dashboard/my-content" },
+  // { item: "Bookmark", link: "/dashboard/bookmark" },
   {
     item: "Change Password",
-    icon: IoKeyOutline,
+
     link: "/dashboard/change-password",
   },
-  { item: "Home", icon: IoHomeOutline, link: "/" },
 ];
 
 const adminRoutes = [
-  { item: "Profile", icon: CgProfile, link: "/dashboard/profile" },
+  { item: "User Profile", link: "/dashboard/profile" },
+  { item: "Edit Profile", link: "/dashboard/edit-profile" },
+  { item: "My Content", link: "/dashboard/my-content" },
   {
     item: "Users Management",
-    icon: FiUsers,
+
     link: "/admin/dashboard/alluser",
   },
   {
     item: "Posts Management",
-    icon: CiGrid42,
+
     link: "/admin/dashboard/allpost",
   },
   {
     item: "Payment History",
-    icon: FaDollarSign,
+
     link: "/admin/dashboard/allPayment",
   },
-  { item: "My Content", icon: CiGrid42, link: "/dashboard/my-content" },
-  { item: "Bookmark", icon: BsBookmarks, link: "/dashboard/bookmark" },
-  { item: "Edit Profile", icon: RiEditLine, link: "/dashboard/edit-profile" },
+  // { item: "Bookmark", link: "/dashboard/bookmark" },
   {
     item: "Change Password",
-    icon: IoKeyOutline,
+
     link: "/dashboard/change-password",
   },
-  { item: "Home", icon: IoHomeOutline, link: "/" },
 ];
 
 const Sidebar = () => {
@@ -259,13 +252,26 @@ const Sidebar = () => {
           <Divider />
 
           <nav className="flex-grow overflow-y-auto p-4 space-y-6">
-            {links.map((item) => (
+            {/* {links.map((item) => (
               <Link key={item.link} href={item.link} onClick={closeSidebar}>
                 <Button
                   className={`w-full justify-start ${
                     item.link === pathname ? " " : ""
                   }`}
                   startContent={<item.icon size={20} />}
+                  variant={item.link === pathname ? "flat" : "light"}
+                >
+                  {item.item}
+                </Button>
+              </Link>
+            ))} */}
+
+            {links.map((item) => (
+              <Link key={item.link} href={item.link} onClick={closeSidebar}>
+                <Button
+                  className={`w-full justify-start ${
+                    item.link === pathname ? " " : ""
+                  }`}
                   variant={item.link === pathname ? "flat" : "light"}
                 >
                   {item.item}
@@ -297,4 +303,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

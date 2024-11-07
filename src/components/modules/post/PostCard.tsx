@@ -134,7 +134,7 @@ export default function PostCard({ post }: { post: TPost }) {
   };
 
   return (
-    <Card className="max-w-xl w-full mx-auto">
+    <Card className="max-w-4xl w-full mx-auto">
       <CardBody className="p-2">
         {/* author information */}
         <div className="flex items-center justify-between mb-2">

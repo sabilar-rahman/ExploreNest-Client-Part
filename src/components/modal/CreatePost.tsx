@@ -23,7 +23,6 @@ import { TResponse } from "@/src/utils";
 import { TPost } from "@/src/types";
 import { postValidationSchema } from "@/src/schemas/create.post.schema";
 
-
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
@@ -60,7 +59,7 @@ const modules = {
 
             if (file.size > 10485760) {
               return toast.warning(
-                "File size exceeds 10 MB limit. Please select a smaller file.",
+                "File size exceeds 10 MB limit. Please select a smaller file."
               );
             }
             const url = await cloudinaryImageUpload(file);
@@ -205,7 +204,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              <h2 className="text-xl font-bold">Edit Comment</h2>
+              <h2 className="text-xl font-bol text-center">Create Post</h2>
             </ModalHeader>
             <ModalBody className="my-8">
               <ENForm
@@ -226,9 +225,13 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                         placeholder="Select your post category"
                       />
                     </div>
-                    <div>
+
+ 
+                     <div>
                       <ENInput label="Location" name="location" type="text" />
-                    </div>
+                    </div> 
+
+
                     {currentUserData?.data?.isVerified && (
                       <div className="sm:col-span-2 flex items-center">
                         <Checkbox
@@ -237,9 +240,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                           value="premium"
                           onValueChange={setIsPremiumContent}
                         >
-                          <span className="text-sm">
-                            Make this post premium content
-                          </span>
+                          <span className="text-sm">Select premium</span>
                         </Checkbox>
                       </div>
                     )}
@@ -249,7 +250,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     <ENTextArea label="Short Description" name="description" />
                   </div>
 
-                  <Divider className="my-4" />
+                  {/* <Divider className="my-4" /> */}
 
                   <div>
                     <label
@@ -268,11 +269,7 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                           <p className="mb-2 text-sm text-default-500">
                             <span className="font-semibold">
                               Click to upload
-                            </span>{" "}
-                            or drag and drop
-                          </p>
-                          <p className="text-xs text-default-400">
-                            PNG, JPG, GIF up to 10MB
+                            </span>
                           </p>
                         </div>
                       </label>

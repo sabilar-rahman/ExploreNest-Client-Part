@@ -1,18 +1,24 @@
 "use client";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/button";
 import { MdRefresh } from "react-icons/md";
-
-
 
 import { useDebounce } from "@/src/utils/useDebounce";
 import { useGetAllPostQuery } from "@/src/redux/featureApi/post/postApi";
 import { TPost } from "@/src/types";
 import PostCard from "../post/PostCard";
-
+import { Avatar, Badge, useDisclosure } from "@nextui-org/react";
+import CreatePost from "../../modal/CreatePost";
+import { GoVerified } from "react-icons/go";
+import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { useAppSelector } from "@/src/redux/hooks";
+import { useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
+import { toast } from "sonner";
+import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
+import Loading from "../../Loading";
 
 const AllPost = () => {
   const { register, watch, reset, setValue } = useForm({
@@ -33,19 +39,68 @@ const AllPost = () => {
     setValue("search", "");
   }, [category, reset, setValue]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { data: user } = useGetCurrentUserQuery({});
+
+  const CurrentUser = useAppSelector(useCurrentUser);
+
+  const handleCreatePostClick = () => {
+    if (!CurrentUser) {
+      toast.warning("You need to login first!");
+    } else {
+      onOpen();
+    }
+  };
+
+  const [hydration, setHydration] = useState(false);
+  useEffect(() => {
+    setHydration(true);
+  }, []);
+  /* If the component hasn't mounted yet,
+   return null to avoid rendering mismatched content
+  */
+  if (!hydration) {
+    return null;
+  }
+
   return (
     <div>
-      <div className="flex flex-col md:flex-row gap-4 my-6 max-w-xl w-full mx-auto">
+      <div className="flex flex-col items-center md:flex-row gap-4 my-6 max-w-4xl w-full mx-auto">
+        <div>
+          <Badge
+            isOneChar
+            className={`${!user?.data?.isVerified ? "hidden" : ""}`}
+            content={<GoVerified />}
+            placement="top-right"
+            shape="circle"
+            size="lg"
+            color="danger"
+          >
+            <Avatar
+              isBordered
+              className="cursor-pointer"
+              radius="sm"
+              src={user?.data?.profileImage}
+            />
+          </Badge>
+        </div>
+        <div>
+          <Button color="success" onPress={handleCreatePostClick}>
+            Create Post
+          </Button>
+
+          <CreatePost isOpen={isOpen} onClose={onClose} />
+        </div>
+
         <Input
-          className="md:w-2/3"
-          placeholder="Search posts..."
+          placeholder="Search here..."
           type="text"
           value={watch("search")}
           onChange={(e) => setValue("search", e.target.value)}
         />
 
         <Select
-          className="md:w-1/3"
           placeholder="Select category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -76,14 +131,8 @@ const AllPost = () => {
           </SelectItem>
         </Select>
 
-        <Button
-          isIconOnly
-          className="mt-2 md:mt-0"
-          color="default"
-          variant="flat"
-          onClick={handleReset}
-        >
-          <MdRefresh size={24} />
+        <Button color="danger" onClick={handleReset}>
+          Clear
         </Button>
       </div>
 
