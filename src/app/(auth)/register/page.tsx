@@ -71,10 +71,10 @@ export default function RegisterPage() {
         <ENForm
           //! Only for development
           defaultValues={{
-            name: "abcd",
-            email: "abcd@gmail.com",
+            name: "",
+            email: "",
             // mobileNumber: "01711223344",
-            password: "123456",
+            password: "",
           }}
           resolver={zodResolver(registerValidationSchema)}
           onSubmit={onSubmit}

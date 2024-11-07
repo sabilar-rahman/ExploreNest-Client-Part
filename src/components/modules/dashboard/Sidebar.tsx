@@ -279,14 +279,7 @@ const Sidebar = () => {
                 </Button>
               </Link>
             ))}
-          </nav>
 
-          <div className="mt-auto p-4 space-y-4">
-            <Divider />
-            {/* <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Theme</span>
-              <ThemeSwitch />
-            </div> */}
             <Button
               className="w-full justify-start text-danger"
               color="danger"
@@ -296,6 +289,23 @@ const Sidebar = () => {
             >
               Logout
             </Button>
+          </nav>
+
+          <div className="mt-auto p-4 space-y-4">
+            <Divider />
+            {/* <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">Theme</span>
+              <ThemeSwitch />
+            </div> */}
+            {/* <Button
+              className="w-full justify-start text-danger"
+              color="danger"
+              startContent={<IoLogOutOutline size={20} />}
+              variant="flat"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button> */}
           </div>
         </div>
       </aside>

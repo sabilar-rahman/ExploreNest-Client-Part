@@ -12,7 +12,7 @@ import { title } from "@/src/components/primitives";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { useLoginMutation } from "@/src/redux/featureApi/auth/authApi";
 import { verifyToken } from "@/src/utils/verifyToken";
-import { setUser, TUser } from "@/src/redux/featureApi/auth/authSlice";
+import { setUser } from "@/src/redux/featureApi/auth/authSlice";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { TResponse } from "@/src/utils";
