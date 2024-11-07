@@ -178,7 +178,7 @@ const adminRoutes = [
   {
     item: "Payment History",
 
-    link: "/admin/dashboard/allPayment",
+    link: "/admin/dashboard/paymentHistory",
   },
   // { item: "Bookmark", link: "/dashboard/bookmark" },
   {
