@@ -225,6 +225,8 @@ import { useDisclosure } from "@nextui-org/modal";
 import Loading from "@/src/components/Loading";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
 import { GoVerified } from "react-icons/go";
+import FollowerModal from "@/src/components/modal/follow&followers/FollowerModal";
+import FollowingModal from "@/src/components/modal/follow&followers/FollowingModal";
 
 const MyProfile = () => {
   const {
@@ -289,6 +291,7 @@ const MyProfile = () => {
           {/* <Divider className="my-6" /> */}
 
           <div className="grid grid-cols-1 md:grid-cols-1 gap-6 ">
+
             <Button
               color="default"
               // style={{
@@ -327,6 +330,8 @@ const MyProfile = () => {
 
           {/* <Divider className="my-2" /> */}
 
+
+
           <div className="flex justify-center space-x-4 mt-4">
             <Link href={`/dashboard/edit-profile`}>
               <Button >Edit Profile</Button>
@@ -335,6 +340,15 @@ const MyProfile = () => {
           </div>
         </CardBody>
       </Card>
+
+      <FollowerModal
+        isOpen={followersModalIsOpen}
+        onClose={followersModalOnClose}
+      />
+      <FollowingModal
+        isOpen={followingModalIsOpen}
+        onClose={followingModalOnClose}
+      />
     </div>
   );
 };
