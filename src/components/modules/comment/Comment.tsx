@@ -81,13 +81,13 @@ const Comment = ({ commentData }: IProps) => {
             <div className="flex justify-end ">
               <Tooltip
                 closeDelay={2000}
-                color="warning"
+                color="danger"
                 content="You need to login first!"
                 isDisabled={user !== null}
               >
                 <Button
                   className="px-6"
-                  color="primary"
+                  color="warning"
                   disabled={user === null}
                   isLoading={isLoading}
                   spinner={<Spinner color="success" size="sm" />}

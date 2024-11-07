@@ -46,13 +46,13 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
 
   return (
     <Card
-      className={` ${recommended ? "border-primary border-2" : ""}`}
+      className={` ${recommended ? " border-2" : ""}`}
       shadow="lg"
     >
       <CardHeader className="flex flex-col items-center pb-0 pt-2 px-4">
-        <h2 className="text-2xl font-bold text-primary">{title}</h2>
+        <h2 className="text-2xl font-bold ">{title}</h2>
         {recommended && (
-          <Chip className="mt-2" color="primary" variant="flat">
+          <Chip className="mt-2" color="warning" variant="flat">
             Recommended
           </Chip>
         )}

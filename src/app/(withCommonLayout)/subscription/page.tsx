@@ -17,7 +17,7 @@ const SubscriptionPage = () => {
         Payment Here
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8 justify-items-center">
+      <div className="flex flex-col items-center gap-4">
         {subscriptionPlans.map((plan, index) => (
           <SubscriptionCard
             key={index}

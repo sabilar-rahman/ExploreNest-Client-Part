@@ -23,7 +23,7 @@ const PremiumCard = () => {
               className="w-full sm:w-auto"
               size="lg"
               variant="bordered"
-              onClick={() => router.back()}
+              onClick={() => router.push('/')}
             >
               Go Back
             </Button>

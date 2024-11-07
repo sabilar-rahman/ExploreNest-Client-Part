@@ -43,8 +43,11 @@ import { TResponse } from "@/src/utils";
 import EditPost from "../../modal/EditPost";
 import ImageGalleryView from "../../imagegallery/ImageGallaryView";
 import { GoVerified } from "react-icons/go";
-import { FaRegCommentDots } from "react-icons/fa";
+import { FaPrint, FaRegCommentDots } from "react-icons/fa";
 import { PiCrown } from "react-icons/pi";
+
+import { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 
 export default function PostCard({ post }: { post: TPost }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -137,15 +140,15 @@ export default function PostCard({ post }: { post: TPost }) {
     if (!user) {
       toast.error("You need to login first!");
     } else {
-      
     }
   };
 
-
-
+  //generate pdf
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   return (
-    <Card className="max-w-4xl w-full mx-auto">
+    <Card ref={contentRef} className="max-w-4xl w-full mx-auto">
       <CardBody className="p-2">
         {/* author information */}
         <div className="flex items-center justify-between mb-2">
@@ -187,7 +190,7 @@ export default function PostCard({ post }: { post: TPost }) {
               isDisabled={user !== null}
             >
               <Button
-              onPress={handleCreatePostClick}
+                onPress={handleCreatePostClick}
                 className={`${
                   post?.author?.followers?.includes(user?._id)
                     ? "bg-success text-white"
@@ -204,9 +207,7 @@ export default function PostCard({ post }: { post: TPost }) {
                     {/* <FiUserCheck className=" mr-1 w-5 h-5" />  */}Unfollow
                   </>
                 ) : (
-                  <>
-                    {/* <FiUserPlus className=" mr-1 w-5 h-5" />  */}Follow
-                  </>
+                  <>{/* <FiUserPlus className=" mr-1 w-5 h-5" />  */}Follow</>
                 )}
               </Button>
             </Tooltip>
@@ -241,9 +242,7 @@ export default function PostCard({ post }: { post: TPost }) {
           <EditPost isOpen={isOpen} post={post} onClose={onClose} />
         </div>
 
-       
         <h1 className="text-lg ">{post?.title}</h1>
-        
 
         {/* <Link className="block mb-2" href={`/post/${post?._id}`}></Link> */}
 
@@ -279,8 +278,6 @@ export default function PostCard({ post }: { post: TPost }) {
               Admin
             </span>
           )} */}
-
-
         </div>
 
         <ImageGalleryView images={post?.images} />
@@ -289,16 +286,12 @@ export default function PostCard({ post }: { post: TPost }) {
           {post?.description?.substring(0, 100)}...
         </p>
 
-
         {/* edited desctiption content  */}
-        
+
         <div
           dangerouslySetInnerHTML={{ __html: post?.content }}
           className="mt-2 prose dark:prose-invert max-w-none"
-        > 
-        
-        </div>
-
+        ></div>
       </CardBody>
       <CardFooter className="flex flex-wrap justify-between items-center px-4 py-3 bg-default-100 dark:bg-default-50">
         <div className="flex space-x-4 mb-2 sm:mb-0">
@@ -309,7 +302,7 @@ export default function PostCard({ post }: { post: TPost }) {
             isDisabled={user !== null}
           >
             <Button
-            onPress={handleCreatePostClick}
+              onPress={handleCreatePostClick}
               className={`${!post?.upvote?.includes(user?._id || "") ? "text-default-500" : "text-black"}`}
               disabled={user === null}
               size="sm"
@@ -328,7 +321,7 @@ export default function PostCard({ post }: { post: TPost }) {
             isDisabled={user !== null}
           >
             <Button
-            onPress={handleCreatePostClick}
+              onPress={handleCreatePostClick}
               className={`${!post?.downvote?.includes(user?._id || "") ? "text-default-500" : "text-black"}`}
               disabled={user === null}
               size="sm"
@@ -346,24 +339,22 @@ export default function PostCard({ post }: { post: TPost }) {
               <span>{post?.commentCount}</span>
             </Button>
           </Link>
+
+
+          {/* print pdf */}
+
+          <div >
+            <Link
+              href="#"
+              className="cursor-pointer"
+              onClick={() => reactToPrintFn()}
+            >
+             <p className="text-red-500 flex items-center gap-2 p-2 shadow-sm"> print <FaPrint /></p>
+             
+            </Link>
+          </div>
         </div>
-        {/* <Button
-          className="text-default-500 hover:text-blue-600"
-          size="sm"
-          variant="light"
-          onClick={() =>
-            handleShare(`http://localhost:3000/post/${post?._id}`)
-          }
-        >
-          <Share2 className="w-5 h-5" />
-          <span>Share</span>
-        </Button> */}
-        {/* {post?.isPremium && (
-          <span className="block  mb-2 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 text-xs font-semibold px-2.5 py-0.5 rounded">
-            <PiCrown className="w-5 h-5" />
-            Premium
-          </span>
-        )} */}
+ 
 
         {post?.isPremium && (
           <span className="flex items-center gap-1 mb-2 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 text-xs font-semibold px-2.5 py-0.5 rounded">
@@ -375,7 +366,7 @@ export default function PostCard({ post }: { post: TPost }) {
         <Link className="block mb-2" href={`/news-feed/post/${post?._id}`}>
           <Button className="text-default-500 " size="sm" variant="light">
             <LucideMousePointerClick className="w-5 h-5" />
-            <span className="text-yellow-400">Click Here to view</span>
+            <span className="text-red-400">Click Here to view</span>
           </Button>
         </Link>
       </CardFooter>

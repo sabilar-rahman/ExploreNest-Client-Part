@@ -226,13 +226,11 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                       />
                     </div>
 
- 
-                     {/* <div>
+                    {/* <div>
                       <ENInput label="Location" name="location" type="text" />
                     </div>  */}
 
-
-                    {currentUserData?.data?.isVerified && (
+                    {/* {currentUserData?.data?.isVerified && (
                       <div className="sm:col-span-2 flex items-center">
                         <Checkbox
                           isSelected={isPremiumContent}
@@ -243,10 +241,8 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                           <span className="text-sm">Select premium</span>
                         </Checkbox>
                       </div>
-                    )}
+                    )} */}
                   </div>
-
-                 
 
                   {/* <Divider className="my-4" /> */}
 
@@ -312,9 +308,28 @@ const CreatePost = ({ isOpen, onClose }: IProps) => {
                     onChange={setValue}
                   />
 
-<div>
-                    <ENTextArea label="Short Description" name="description" />
+                  <div>
+                    <ENTextArea label="Description" name="description" />
                   </div>
+
+                  <div>
+                  {currentUserData?.data?.isVerified && (
+                      <div className="sm:col-span-2 flex items-center">
+                        <Checkbox
+                          isSelected={isPremiumContent}
+                          radius="full"
+                          value="premium"
+                          onValueChange={setIsPremiumContent}
+                        >
+                          <span className="text-sm">Select premium</span>
+                        </Checkbox>
+                      </div>
+                    )}
+                  </div>
+
+
+
+
 
                   <div className="flex justify-center mt-6">
                     <Button
