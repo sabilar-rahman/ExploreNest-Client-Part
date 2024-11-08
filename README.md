@@ -4,7 +4,7 @@
 Live Deployment Link
 Live Deployment Link 
 Client:  https://explore-nest-client.vercel.app
-Server: http://localhost:5000
+Server: https://explore-nest-server-swart.vercel.app
 
 GitHub Repository Links 
 Client:  https://github.com/sabilar-rahman/ExploreNest-Client-Part

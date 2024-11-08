@@ -48,12 +48,13 @@ import { useAppSelector } from "@/src/redux/hooks";
 import { IUser, useCurrentUser } from "@/src/redux/featureApi/auth/authSlice";
 import { Button } from "@nextui-org/button";
 import { useGetCurrentUserQuery } from "@/src/redux/featureApi/auth/authApi";
+import { ReactNode } from "react";
 // import { TUser } from "@/src/utils";
 // import { TUser } from "@/src/utils";
 
-type PaymentModalProps = {
-  setOpenPaymentModal: (openPaymentModal: boolean) => void;
-};
+// type PaymentModalProps = {
+//   setOpenPaymentModal: (openPaymentModal: boolean) => void;
+// };
 
 type TPaymentData = {
   name: string;
@@ -64,7 +65,7 @@ type TPaymentData = {
   address: string;
 };
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ setOpenPaymentModal }) => {
+const PaymentModal = () => {
   const router = useRouter();
   const [makePayment, { isLoading }] = useCreatePaymentMutation() as any;
   // const user = (useAppSelector(useCurrentUser) as IUser) || null;
@@ -108,7 +109,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ setOpenPaymentModal }) => {
         </div>
 
         <RxCross2
-          onClick={() => setOpenPaymentModal(false)}
+          // onClick={() => setOpenPaymentModal(false)}
           className="text-2xl cursor-pointer"
         />
       </div>
@@ -226,7 +227,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ setOpenPaymentModal }) => {
         <p className="text-sm text-[#364F53] dark:text-[#D9D9D9]/50 text-center">
           Don't want to pay now?
           <Link
-            onClick={() => setOpenPaymentModal(false)}
+            // onClick={() => setOpenPaymentModal(false)}
             href={"/"}
             className="font-semibold text-primary-30"
           >

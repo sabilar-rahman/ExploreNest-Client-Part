@@ -1,25 +1,31 @@
 import { z } from "zod";
 
-
-
 export const forgetPasswordValidationSchema = z.object({
   email: z.string().trim().email("Please enter a valid email"),
 });
 
-export const userUpdateValidationSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  gender: z.string().min(1, { message: "Gender is required" }),
-  mobileNumber: z
-    .string()
-    .min(10, { message: "Mobile number must be at least 10 digits" })
-    .max(15, { message: "Mobile number cannot exceed 15 digits" })
-    .regex(/^[0-9]+$/, {
-      message: "Mobile number should contain only digits",
-    }),
-  address: z.string().optional(),
-  bio: z.string().optional(),
-});
+// export const userUpdateValidationSchema = z.object({
+//   name: z.string().min(1, { message: "Name is required" }),
+//   gender: z.string().min(1, { message: "Gender is required" }),
+//   mobileNumber: z
+//     .string()
+//     .min(10, { message: "Mobile number must be at least 10 digits" })
+//     .max(15, { message: "Mobile number cannot exceed 15 digits" })
+//     .regex(/^[0-9]+$/, {
+//       message: "Mobile number should contain only digits",
+//     }),
+//   address: z.string().optional(),
+//   bio: z.string().optional(),
+// });
 
+export const userUpdateValidationSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }).trim().optional(),
+
+  profileImage: z
+    .string()
+    .url({ message: "Invalid profile image URL" })
+    .optional(),
+});
 
 export const resetPasswordValidationSchema = z
   .object({
@@ -33,4 +39,3 @@ export const resetPasswordValidationSchema = z
     path: ["confirmPassword"],
     message: "Passwords do not match",
   });
-

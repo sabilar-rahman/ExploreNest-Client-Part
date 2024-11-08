@@ -20,7 +20,7 @@ export interface ENInput {
 
 interface IProps extends ENInput {}
 
-const TTextarea = ({ label, name, variant = "bordered" }: IProps) => {
+const ENTextarea = ({ label, name, variant = "bordered" }: IProps) => {
   const {
     register,
     formState: { errors },
@@ -38,4 +38,4 @@ const TTextarea = ({ label, name, variant = "bordered" }: IProps) => {
   );
 };
 
-export default TTextarea;
+export default ENTextarea;
