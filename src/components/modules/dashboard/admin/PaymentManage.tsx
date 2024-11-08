@@ -13,22 +13,35 @@ import { Avatar } from "@nextui-org/avatar";
 import { format } from "date-fns";
 
 import { useGetAllPaymentQuery } from "@/src/redux/featureApi/payment/paymentApi";
-import { TPayment } from "@/src/utils";
+// import { TPayment } from "@/src/utils";
 import Loading from "@/src/components/Loading";
-
 
 const columns = [
   { name: "NAME", uid: "name" },
-  { name: "PAYMENT AMOUNT", uid: "amount" },
+  { name: "Email", uid: "email" },
+  { name: "AMOUNT", uid: "amount" },
   { name: "TRANSACTION ID", uid: "transactionId" },
-  { name: "PLAN TITLE", uid: "planTitle" },
-  { name: "EXPIRY DATE", uid: "expiryDate" },
-  { name: "STATUS", uid: "paymentStatus" },
+  
+  { name: "Issue Date", uid: "expiryDate" },
+ 
 ];
 
+export type TPayment = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  userId: string;
+  amount: string;
+  transactionId: string;
+  address: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+};
 
 const PaymentManage = () => {
-    const { data: getAllPayment, isLoading: paymentLoading } =
+  const { data: getAllPayment, isLoading: paymentLoading } =
     useGetAllPaymentQuery(undefined);
 
   const payments: TPayment[] = getAllPayment?.data || [];
@@ -38,18 +51,20 @@ const PaymentManage = () => {
       case "name":
         return (
           <div className="flex items-center gap-2">
-            <Avatar src={payment.user?.profileImage}>
-              {payment.user?.name}
-            </Avatar>
-            <p className="text-xs">{payment.user?.name}</p>
+            {/* <Avatar src={payment.user?.profileImage}>
+            </Avatar> */}
+            {payment.name}
+            {/* <p className="text-xs">{payment.user?.name}</p> */}
           </div>
         );
+      case "email":
+        return <p className="text-xs">{payment?.email}</p>;
       case "amount":
-        return <p className="text-xs">${payment?.amount}</p>;
+        return <p className="text-xs">{payment?.amount}$</p>;
       case "transactionId":
         return <p className="text-xs">{payment?.transactionId}</p>;
-      case "planTitle":
-        return <p className="text-xs">{payment?.planTitle}</p>;
+      // case "planTitle":
+      //   return <p className="text-xs">{payment?.planTitle}</p>;
       case "expiryDate":
         return (
           <p className="text-xs">
@@ -57,16 +72,16 @@ const PaymentManage = () => {
             {format(new Date(payment?.createdAt), "MMM dd, yyyy")}
           </p>
         );
-      case "paymentStatus":
-        return (
-          <Chip
-            className="text-white"
-            color={payment?.status === "Active" ? "success" : "danger"}
-            size="sm"
-          >
-            {payment?.status}
-          </Chip>
-        );
+      // case "paymentStatus":
+      //   return (
+      //     <Chip
+      //       className="text-white"
+      //       color={payment?.status === "Active" ? "success" : "danger"}
+      //       size="sm"
+      //     >
+      //       {payment?.status}
+      //     </Chip>
+      //   );
       default:
         return <p>N/A</p>;
     }
@@ -117,3 +132,5 @@ const PaymentManage = () => {
 };
 
 export default PaymentManage;
+
+
