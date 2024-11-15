@@ -84,7 +84,7 @@ const PaymentModal = () => {
       email: data.email,
       phoneNumber: data.phoneNumber,
       userId: user?.data?._id,
-      amount: "100",
+      amount: "49",
       address: data.address,
     };
     console.log(paymentData);
