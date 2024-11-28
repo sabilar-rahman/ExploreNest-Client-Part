@@ -238,7 +238,7 @@ const Sidebar = () => {
               <Link className="flex items-center space-x-2" href="/">
                 <FcHome size={24} />
                 <span className="flex items-center text-xl font-semibold">
-                  Home <LucideMousePointerClick />
+                  ExploreNest <LucideMousePointerClick />
                 </span>
               </Link>
               <Button

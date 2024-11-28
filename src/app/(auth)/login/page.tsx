@@ -27,15 +27,16 @@ const LoginPage = () => {
       const res = await login(data);
       const token = res.data?.data?.accessToken;
       const decodedToken = verifyToken(token);
-      dispatch(setUser({ user:decodedToken, token: res.data?.data?.accessToken}));
+      dispatch(
+        setUser({ user: decodedToken, token: res.data?.data?.accessToken })
+      );
 
       // if (user) {
       //   toast.success("Login Successfull");
       //   router.push("/");
       // }
-      toast.success('Login Successfully')
-       router.push("/");
-
+      toast.success("Login Successfully");
+      router.push("/");
     } catch (error) {}
   };
 
@@ -72,6 +73,29 @@ const LoginPage = () => {
           Don&lsquo;t have account ? <Link href={"/register"}>Register</Link>
         </div>
       </div>
+
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+  <div>
+    <h2 className="text-lg font-bold">ADMIN Credentials</h2>
+    <p className="text-sm">
+      Email: <strong>Sabilar@admin.com</strong>
+    </p>
+    <p className="text-sm">
+      Password: <strong>12345678</strong>
+    </p>
+  </div>
+
+  <div>
+    <h2 className="text-lg font-bold">USER Credentials</h2>
+    <p className="text-sm">
+      Email: <strong>Sabilar@user.com</strong>
+    </p>
+    <p className="text-sm">
+      Password: <strong>12345678</strong>
+    </p>
+  </div>
+</div>
+
     </div>
   );
 };
